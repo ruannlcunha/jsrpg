@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=PT+Serif&family=Playfair+Display&family=Roboto+Slab&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+@font-face {
+  font-family: titleFont;
+  src: url(./assets/font/alagard.ttf);
+}
+
+:root {
+  --black: #000000;
+  --grey: #494949;
+  --light-grey: #d4d4d4;
+  --white: #ffffff;
+  --red: #FE2826;
+  --black-transparent: #000000b6;
+  --grey-transparent: #d4d4d4b0;
+  --yellow-transparent: #fdff7698;
+  --white-transparent: #ffffffb0;
+  --cyan-transparent: #cef8ff63;
+  --blue-transparent: #1e43949c;
+  --light-blue: #82dcfd;
+  --blue: #1e4394;
+  --dark-blue: #0f2249;
+  --dark-green: #0b410b;
+  --cyan: #44DBFA;
+  --background: #f0f0f0;
+  --background-text: #00000065;
+  --perfil-amarelo: #ffd9009c;
+  --perfil-ciano: #00f7ff9c;
+  --perfil-roxo: #6419749c;
+  --perfil-verde: #097e059c;
+  --perfil-inimigo: #ff00009c;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Pixelify Sans", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--black-transparent);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--white);
+    border-radius: 5px;
+}
+
+div .white-screen {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  animation: fade-in 4s;
+}
+
+@keyframes fade-out {
+  from {opacity: 100%;}
+  to {opacity: 0%;}
+}
+
+@keyframes fade-in {
+  from {opacity: 0%;}
+  to {opacity: 100%;}
+}
+
+@keyframes shine {
+  from {
+      filter: brightness(100%);
+  }
+  to {
+      filter: brightness(105%);
+    }
+}
+
+@keyframes leftToRight {
+    from {
+        background-position: left;
+    }
+    to {
+        background-position: right;
+    }
+}
+
+@keyframes floating {
+    from {transform: translateY(-5px);}
+    to {transform: translateY(5px);}
+}
+

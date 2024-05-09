@@ -1,0 +1,13 @@
+
+.batalha-screen .batalha-hud {
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: self-end;
+    border-right: none;
+    animation: fade-in 0.5s;
+}
