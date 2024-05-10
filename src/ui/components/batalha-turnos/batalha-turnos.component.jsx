@@ -5,18 +5,12 @@ export function BatalhaTurnos({personagens, idAtivo, isD20Active, iniciativaTerm
     const [personagensAtuais, setPersonagensAtuais] = useState(personagens)
 
     useEffect(()=>{
-        if(!iniciativaTerminou) {
-            setPersonagensAtuais(personagens.sort(function(a, b) {
-                return a.ordemInicial - b.ordemInicial;
-            }))
+        if(iniciativaTerminou) {
+            setPersonagensAtuais(item => {
+                const ordenados = personagens.sort(function(a, b) {return b.resultadoIniciativa - a.resultadoIniciativa;})
+                return [...ordenados]
+            })
         }
-    },[personagens])
-
-    useEffect(()=>{
-        setPersonagensAtuais(item => {
-            const ordenados = personagens.sort(function(a, b) {return b.resultadoIniciativa - a.resultadoIniciativa;})
-            return [...ordenados]
-    })
     },[iniciativaTerminou])
 
     function renderDado(iniciativa) {
@@ -27,10 +21,15 @@ export function BatalhaTurnos({personagens, idAtivo, isD20Active, iniciativaTerm
 
     function renderPerfilTurno(personagem, index) {
         const ativo = iniciativaTerminou && personagem.idCombate===idAtivo && idAtivo
+        const novoPersonagem = personagens.find(item => item.idCombate === personagem.idCombate)
+        
+        const perfilStyle = {
+            backgroundImage: `url(${novoPersonagem.perfil})`, filter: `${novoPersonagem.isMorto?"grayscale(100%)":null}`
+        }
         return (
-            <div key={index} style={{backgroundImage: `url(${personagem.perfil})`}}
+            <div key={index} style={perfilStyle}
             className= {ativo ? "batalha-turnos-ativo" : null}>
-                {renderDado(personagem.resultadoIniciativa)}
+                {renderDado(novoPersonagem.resultadoIniciativa)}
             </div>
         )
     }

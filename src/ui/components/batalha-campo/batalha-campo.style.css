@@ -1,15 +1,26 @@
 
-.batalha-screen .batalha-sprites {
+.batalha-screen .batalha-campo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../../../assets/img/backgrounds/BATTLE_BACKGROUND.png);
+    background-size: cover;
+    background-position: bottom;
+}
+
+.batalha-screen .batalha-campo section {
     width: 100%;
     height: 60%;
-    margin-bottom: 8rem;
     display: flex;
     align-items: center;
     flex-direction: row;
     animation: fade-in 0.5s;
+    margin-bottom: 1rem;
 }
 
-.batalha-screen .batalha-sprites div {
+.batalha-screen .batalha-campo section div {
     width: 50%;
     height: 100%;
     display: flex;
@@ -18,7 +29,7 @@
     justify-content: center;
 }
 
-.batalha-screen .batalha-sprites div section {
+.batalha-screen .batalha-campo section div section {
     height: 100%;
     width: 25%;
     margin: 0;

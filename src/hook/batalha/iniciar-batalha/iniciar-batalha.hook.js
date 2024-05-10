@@ -1,21 +1,14 @@
 import { useEffect, useState } from "react"
 import { useRolarIniciativa } from "../rolar-iniciativa/use-rolar-iniciativa.hook"
 
-export function useIniciarBatalha(aliados, inimigos) {
-    const [aliadosParty, setAliadosParty] = useState([...aliados])
-    const [inimigosParty, setInimigosParty] = useState([...inimigos])
-    const todosParty = [...aliados, ...inimigos]
+export function useIniciarBatalha() {
+    const { rolarIniciativa } = useRolarIniciativa()
 
-    const { rolarIniciativa, adicionarAtributosDeCombate } = useRolarIniciativa()
-
-
-    function ordenarPersonagens() {
-        const novosPersonagens = rolarIniciativa(todosParty)
-        setAliadosParty(adicionarAtributosDeCombate(aliadosParty, novosPersonagens))
-        setInimigosParty(adicionarAtributosDeCombate(inimigosParty, novosPersonagens))
+    function ordenarPersonagens(personagens) {
+        const novosPersonagens = rolarIniciativa(personagens)
         return novosPersonagens
     }
 
-    return { ordenarPersonagens, aliadosParty, inimigosParty }
+    return { ordenarPersonagens }
 
 }

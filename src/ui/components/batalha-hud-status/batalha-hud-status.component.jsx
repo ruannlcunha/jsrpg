@@ -3,7 +3,7 @@ import { calcularPorcentagem } from "../../../utils/calcular-porcentagem.util"
 import pixelTexture from "../../../assets/img/backgrounds/pixel.png"
 
 export function BatalhaHudStatus({personagem}) {
-    const porcentagemVida = calcularPorcentagem(personagem.hpAtual, personagem.hpTotal)
+    const porcentagemVida = calcularPorcentagem(personagem.pvAtual, personagem.hpTotal)
     const porcentagemMana = calcularPorcentagem(personagem.mpAtual, personagem.mpTotal)
 
     return (
@@ -14,7 +14,7 @@ export function BatalhaHudStatus({personagem}) {
             <header><h1>{personagem.nome}</h1></header>
             <section>
 
-                <h2>HP: {personagem.hpAtual}/{personagem.hpTotal}</h2>
+                <h2>HP: {personagem.pvAtual}/{personagem.hpTotal}</h2>
                 <div
                 className="batalha-hud-barra"
                 style={{background: `linear-gradient(to right, var(--red) ${porcentagemVida}%, var(--light-grey) 1%)`}}
