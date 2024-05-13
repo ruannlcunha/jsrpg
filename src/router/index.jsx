@@ -1,7 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import { 
-  BatalhaScreen,
-  RootScreen} from "../ui/screens";
+import { BatalhaScreen, RootScreen } from "../ui/screens";
 
 export const router = createHashRouter([
   {

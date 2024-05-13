@@ -1,4 +1,3 @@
-
 export function calcularPorcentagem(menor, maior) {
-    return (menor/maior)*100
+  return (menor / maior) * 100;
 }

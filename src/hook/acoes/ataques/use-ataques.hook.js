@@ -1,44 +1,26 @@
-import { useRolarDado } from "../../batalha/rolar-dado/use-rolar-dado.hook"
+import { useRolarDado } from "../../batalha/rolar-dado/use-rolar-dado.hook";
+import { useAcoesBase } from "../_base/use-acoes-base.hook";
+import { EFFECTS } from "../../../constants/images";
 
 export function useAtaques() {
-    const { rolarDado } = useRolarDado()
+  const { rolarDado } = useRolarDado();
+  const { iniciarEfeito, causarDano, finalizarAcao } = useAcoesBase();
 
-    function _matarPersonagem(alvo) {
-        return {...alvo, isMorto: true}
-    }
+  function soco(personagem, alvo, functions) {
+    functions.setAnimacoes((old) => {
+      return { ...old, escolhendoAlvo: false };
+    });
 
-    function _pularTurno(setTurno) {
-        setTurno(old => { 
-            if(old.atual>=old.maximo-1) {
-                return {...old, atual: 0} 
-            }
-            return {...old, atual: old.atual + 1} 
-        })
-    }
+    const dano = rolarDado(3, personagem.atributos.forca);
+    functions.ativarBannerRolagem(dano.resultadoTotal, 2);
 
-    function _alterarPersonagem(setPersonagens, novoAlvo) {
-        setPersonagens(old => {
-            return old.map(personagem => {
-                if(personagem.idCombate===novoAlvo.idCombate) {
-                    if(novoAlvo.pvAtual<1) {
-                        return _matarPersonagem(novoAlvo)
-                    }
-                    return novoAlvo
-                }
-                return personagem
-            })
-        })
-    }
+    setTimeout(() => {
+      const novoAlvo = causarDano(alvo, dano, functions);
+      const duracao = iniciarEfeito(novoAlvo, functions, EFFECTS.SOCO_EFFECT);
 
-    function soco(personagem, alvo, functions) {
-        const dano = rolarDado(3, personagem.atributos.forca)
-        const novoAlvo = {...alvo, pvAtual: Number(alvo.pvAtual - dano.resultadoTotal)}
-        functions.setAcaoAtiva({personagem: null, evento: null})
-        functions.setAnimacoes(old => { return {...old, escolhendoAlvo: false, hudAtivo: true} })
-        _pularTurno(functions.setTurno)
-        _alterarPersonagem(functions.setPersonagens, novoAlvo)
-    }
+      finalizarAcao(functions, novoAlvo, duracao);
+    }, 5010);
+  }
 
-    return { soco }
-
+  return { soco };
 }

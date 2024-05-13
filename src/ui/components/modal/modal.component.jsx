@@ -1,28 +1,23 @@
-import "./modal.style.css"
+import "./modal.style.css";
 
-export function Modal({children, isOpen, setIsOpen}) {
+export function Modal({ children, isOpen, setIsOpen }) {
+  const handleClose = (event) => {
+    event.preventDefault();
 
-    const handleClose = event => {
-        event.preventDefault();
-    
-        if (event.target === event.currentTarget) {
-          setIsOpen(false)
-        }
-    };
-
-    function renderModal() {
-        if(isOpen) {
-            return (
-                <div className="modal" onClick={handleClose}>
-                    {children}
-                </div>
-            )
-        }
+    if (event.target === event.currentTarget) {
+      setIsOpen(false);
     }
+  };
 
-    return (
-        <>
-        {renderModal()}
-        </>
-    )
+  function renderModal() {
+    if (isOpen) {
+      return (
+        <div className="modal" onClick={handleClose}>
+          {children}
+        </div>
+      );
+    }
+  }
+
+  return <>{renderModal()}</>;
 }

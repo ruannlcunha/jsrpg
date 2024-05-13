@@ -1,0 +1,84 @@
+.batalha-screen .batalha-hud .hud-status {
+  width: 45%;
+  height: 100%;
+  border-top: double var(--white) 5px;
+  border-radius: 0 5px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: self-end;
+  background-position: right;
+  background-size: cover;
+}
+
+.batalha-screen .batalha-hud .hud-status header {
+  width: 100%;
+  height: 25%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  border-bottom: double var(--white) 5px;
+  border-radius: 0 0 5px 0;
+}
+
+.batalha-screen .batalha-hud .hud-status header h1 {
+  width: 50%;
+  height: 100%;
+  margin: 0;
+  font-size: 36px;
+  font-weight: 300;
+  text-shadow: 2px 3px var(--black);
+  color: var(--white);
+  font-family: titleFont, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.batalha-screen .batalha-hud .hud-status section {
+  width: 50%;
+  height: 70%;
+  color: var(--white);
+  text-shadow: 2px 3px var(--black);
+  display: flex;
+  flex-direction: column;
+}
+
+.batalha-screen .batalha-hud .hud-status section h2 {
+  margin: 10px 0 5px 0;
+  font-weight: 300;
+  font-family: titleFont, sans-serif;
+  font-size: 24px;
+  filter: drop-shadow(-2px 2px 5px var(--dark-blue));
+}
+
+.batalha-screen .batalha-hud .hud-status section .batalha-hud-barra {
+  width: 90%;
+  height: 10px;
+  border: solid 3px var(--white);
+  transform: skew(-25deg);
+}
+
+.batalha-screen .batalha-hud .hud-status img {
+  position: absolute;
+  bottom: 0;
+  width: 22%;
+  animation: hud-perfil 1s alternate infinite ease-in-out;
+}
+
+@keyframes hud-perfil {
+  from {
+    transform: translate(-1px, 0) scaleX(-1);
+  }
+  to {
+    transform: translate(0px, 0) scaleX(-1);
+  }
+}
+
+@keyframes hud-perfil-inimigo {
+  from {
+    transform: translate(-1px, 0);
+  }
+  to {
+    transform: translate(0px, 0);
+  }
+}

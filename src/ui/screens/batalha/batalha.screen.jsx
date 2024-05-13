@@ -1,106 +1,131 @@
-import "./batalha.style.css"
-import { BatalhaBanner, BatalhaHud, BatalhaCampo, BatalhaTurnos, ContainerScreen } from "../../components"
-import { PERSONAGENS_DATA } from "../../../database/personagens.data"
-import { useIniciarBatalha } from "../../../hook/batalha/"
-import { useEffect, useState } from "react"
-import { useAtivarBanner } from "../../../hook"
+import "./batalha.style.css";
+import {
+  CampoDeBatalha,
+  Turnos,
+  ContainerScreen,
+  BatalhaHUD,
+  OpcoesBatalha,
+  Banner,
+} from "../../components";
+import { PERSONAGENS_DATA } from "../../../database/personagens.data";
+import {
+  useFinalizarTurno,
+  useIniciarBatalha,
+  useInstanciarPersonagens,
+  useZoomCampo,
+} from "../../../hook/batalha/";
+import { useEffect, useState } from "react";
+import { useBanners } from "../../../hook";
 
 export function BatalhaScreen() {
-    const PERSONAGENS_PARTY = [
-        {...PERSONAGENS_DATA[0], idCombate: 1, posicaoEmCampo: 1, ordemInicial: 1, isInimigo: false, isMorto: false},
-        {...PERSONAGENS_DATA[1], idCombate: 2, posicaoEmCampo: 2, ordemInicial: 2, isInimigo: false, isMorto: false},
-        {...PERSONAGENS_DATA[2], idCombate: 3, posicaoEmCampo: 3, ordemInicial: 3, isInimigo: false, isMorto: false},
-        {...PERSONAGENS_DATA[3], idCombate: 4, posicaoEmCampo: 4, ordemInicial: 4, isInimigo: false, isMorto: false},
-    ]
-    const INIMIGOS_PARTY = [
-        {...PERSONAGENS_DATA[4], idCombate: 5, posicaoEmCampo: 1, ordemInicial: 5, isInimigo: true, isMorto: false},
-        {...PERSONAGENS_DATA[4], idCombate: 6, posicaoEmCampo: 2, ordemInicial: 6, isInimigo: true, isMorto: false},
-        {...PERSONAGENS_DATA[4], idCombate: 7, posicaoEmCampo: 3, ordemInicial: 7, isInimigo: true, isMorto: false},
-        {...PERSONAGENS_DATA[4], idCombate: 8, posicaoEmCampo: 4, ordemInicial: 8, isInimigo: true, isMorto: false},
-    ]
-    
-    const [banner, setBanner] = useState({texto: "", ativo: false})
-    const { ativarBanner } = useAtivarBanner();
+  const { banners, setBanners, ativarBannerTexto, ativarBannerRolagem, ativarBannerInimigo } =
+    useBanners();
+  const [personagens, setPersonagens] = useState([]);
+  const [personagemAtivo, setPersonagemAtivo] = useState({ idCombate: null });
+  const [acaoAtiva, setAcaoAtiva] = useState({
+    personagem: null,
+    evento: null,
+  });
+  const [turno, setTurno] = useState({ atual: 0, maximo: 0 });
+  const { instanciarPersonagens } = useInstanciarPersonagens();
+  const { iniciarBatalha } = useIniciarBatalha(banners);
+  const { finalizarTurno } = useFinalizarTurno();
+  const { zoom, aumentarZoom, diminuirZoom } = useZoomCampo();
 
-    const [personagens, setPersonagens] = useState([...PERSONAGENS_PARTY, ...INIMIGOS_PARTY])
-    const [personagemAtivo, setPersonagemAtivo] = useState({idCombate: null})
-    const [acaoAtiva, setAcaoAtiva] = useState({personagem: null, evento: null})
-    const [turno, setTurno] = useState({atual: 0, maximo: personagens.length})
+  const [animacoes, setAnimacoes] = useState({
+    isDadosAtivos: false,
+    hudAtivo: false,
+    iniciativaTerminou: false,
+    escolhendoAlvo: false,
+  });
 
-    const { ordenarPersonagens } = useIniciarBatalha()
-    
-    const [animacoes, setAnimacoes] = useState({
-        iniciativaDadosAtivo: false, hudAtivo: false, iniciativaTerminou: false, escolhendoAlvo: false
-    })
+  useEffect(() => {
+    const personagensInstanciados = instanciarPersonagens(
+      [
+        PERSONAGENS_DATA[0],
+        PERSONAGENS_DATA[1],
+        PERSONAGENS_DATA[2],
+        PERSONAGENS_DATA[3],
+      ],
+      [
+        PERSONAGENS_DATA[4],
+        PERSONAGENS_DATA[4],
+        PERSONAGENS_DATA[4],
+        PERSONAGENS_DATA[4],
+      ]
+    );
+    setTurno({ atual: 0, maximo: personagensInstanciados.length });
+    setPersonagens(personagensInstanciados);
+    iniciarBatalha(personagensInstanciados, {
+      setBanners,
+      setAnimacoes,
+      setPersonagens,
+      ativarBannerTexto,
+    });
+  }, []);
 
-    useEffect(()=>{
-        ordemDeEventos()
-    },[])
+  useEffect(() => {
+    finalizarTurno(personagens, turno, {
+      ativarBannerTexto,
+      setPersonagemAtivo,
+      setBanners,
+    });
+  }, [turno, personagens]);
 
-    useEffect(()=>{
-        setPersonagemAtivo(
-            personagens.sort(function(a, b) {return b.resultadoIniciativa - a.resultadoIniciativa;})[turno.atual])
-    },[turno, personagens])
+  return (
+    <ContainerScreen>
+      <div className="batalha-screen">
+        <OpcoesBatalha
+          animacoes={animacoes}
+          zoom={zoom}
+          functions={{ setAnimacoes, aumentarZoom, diminuirZoom }}
+        />
 
-    console.log(personagens)
+        <Banner banner={banners}/>
 
-    function ordemDeEventos() {
-        
-        // ativarBanner("BATALHA", setBanner)
+        {personagens.length > 0 && personagemAtivo ? (
+          <>
+            <Turnos
+              animacoes={animacoes}
+              idAtivo={personagemAtivo.idCombate}
+              personagens={personagens}
+            />
 
-        // setTimeout(()=>{ativarBanner("Rolem iniciativa!", setBanner)}, 6000)
+            <CampoDeBatalha
+              idAtivo={personagemAtivo.idCombate}
+              aliados={personagens.filter((item) => item.isInimigo === false)}
+              inimigos={personagens.filter((item) => item.isInimigo === true)}
+              animacoes={animacoes}
+              acaoAtiva={acaoAtiva}
+              zoom={zoom}
+              functions={{
+                setAcaoAtiva,
+                setAnimacoes,
+                setPersonagens,
+                setTurno,
+                setBanners,
+                ativarBannerRolagem,
+              }}
+            />
 
-        //Rolar iniciativa
-        setTimeout(()=>{
-            setAnimacoes({...animacoes, iniciativaDadosAtivo: true})
-            const novosPersonagens = ordenarPersonagens(personagens)
-            setPersonagens(novosPersonagens)
-        }, 3000)
-
-        //Sumir dados de iniciativa
-        setTimeout(()=>{
-            setAnimacoes({...animacoes,
-                iniciativaDadosAtivo: false,
-                hudAtivo:true,
-                iniciativaTerminou: true
-            })
-        }, 8000)
-    }
-
-    return (
-        <ContainerScreen>
-            <div className="batalha-screen">
-                <BatalhaBanner texto={banner.texto} ativo={banner.ativo}/>
-
-                {personagens.length>0 ?
-                <>
-                <BatalhaTurnos 
-                isD20Active={animacoes.iniciativaDadosAtivo} 
-                iniciativaTerminou={animacoes.iniciativaTerminou}
-                idAtivo={personagemAtivo.idCombate} 
-                personagens={personagens}
-                />
-                
-                <BatalhaCampo
-                idAtivo={personagemAtivo.idCombate}
-                aliados={personagens.filter(item => item.isInimigo===false)} 
-                inimigos={personagens.filter(item => item.isInimigo===true)}
-                animacoes={animacoes}
-                acaoAtiva={acaoAtiva}
-                functions={{setAcaoAtiva, setAnimacoes, setPersonagens, setTurno}}
-                />
-                
-                <BatalhaHud 
-                hudAtivo={animacoes.hudAtivo} 
-                personagem={personagemAtivo}
-                setAnimacoes={setAnimacoes}
-                setAcaoAtiva={setAcaoAtiva}
-                />
-                </>
-
-                :null}
-            </div>
-        </ContainerScreen>
-    )
-
+            <BatalhaHUD
+              personagens={personagens}
+              personagemAtivo={personagemAtivo}
+              animacoes={animacoes}
+              turno={turno}
+              functions={{
+                setAcaoAtiva,
+                setAnimacoes,
+                setPersonagens,
+                setTurno,
+                setBanners,
+                ativarBannerRolagem,
+                ativarBannerInimigo
+              }}
+            />
+          </>
+        ) : null}
+      </div>
+    </ContainerScreen>
+  );
 }

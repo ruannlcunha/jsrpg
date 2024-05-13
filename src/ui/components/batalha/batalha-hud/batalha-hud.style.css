@@ -1,0 +1,36 @@
+.batalha-screen .batalha-hud {
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: self-end;
+  border-right: none;
+  animation: fade-in 0.5s;
+}
+
+.batalha-screen .escolhendo-alvo {
+  position: absolute;
+  top: 1rem;
+  font-size: 42px;
+  color: var(--white);
+  text-shadow: 2px 3px 2px var(--black);
+  font-family: titleFont, sans-serif;
+}
+
+.batalha-screen .cancelar-acao {
+  position: absolute;
+  bottom: 1rem;
+  font-size: 32px;
+  color: var(--white);
+  text-shadow: 2px 2px 2px var(--black);
+  transition: all 0.1s;
+}
+
+.batalha-screen .cancelar-acao:hover {
+  cursor: pointer;
+  color: var(--light-grey);
+  transition: all 0.1s;
+}
