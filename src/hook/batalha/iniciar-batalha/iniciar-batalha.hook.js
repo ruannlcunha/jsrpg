@@ -1,8 +1,9 @@
-import { useBanners } from "../../";
+import { useMusic } from "../../";
 import { useRolarIniciativa } from "../rolar-iniciativa/use-rolar-iniciativa.hook";
 
 export function useIniciarBatalha() {
   const { rolarIniciativa } = useRolarIniciativa();
+  const { playBattle1 } = useMusic()
 
   function _ordenarPersonagens(personagens) {
     const novosPersonagens = rolarIniciativa(personagens);
@@ -24,6 +25,7 @@ export function useIniciarBatalha() {
 
         //Sumir dados de iniciativa
         setTimeout(() => {
+          playBattle1()
           functions.setAnimacoes((old) => {
             return {
               ...old,

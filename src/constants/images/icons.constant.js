@@ -6,6 +6,11 @@ import ZOOM_IN from "../../assets/img/icons/ZOOM_IN.png";
 import SETA_ATIVO from "../../assets/img/icons/SETA_ATIVO.png";
 import SETA_DIREITA from "../../assets/img/icons/SETA_DIREITA.png";
 import ESCOLHER_BAIXO from "../../assets/img/icons/ESCOLHER_BAIXO.png";
+import VOLUME_ALTO from "../../assets/img/icons/VOLUME_ALTO.png";
+import VOLUME_MEDIO from "../../assets/img/icons/VOLUME_MEDIO.png";
+import VOLUME_BAIXO from "../../assets/img/icons/VOLUME_BAIXO.png";
+import VOLUME_MUTADO from "../../assets/img/icons/VOLUME_MUTADO.png";
+import CONFIG from "../../assets/img/icons/CONFIG.png";
 
 export const ICONS = {
   HUD,
@@ -16,4 +21,9 @@ export const ICONS = {
   SETA_ATIVO,
   ESCOLHER_BAIXO,
   SETA_DIREITA,
+  VOLUME_ALTO,
+  VOLUME_MEDIO,
+  VOLUME_BAIXO,
+  VOLUME_MUTADO,
+  CONFIG,
 };

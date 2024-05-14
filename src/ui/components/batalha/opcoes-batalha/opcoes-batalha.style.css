@@ -22,14 +22,15 @@
   width: 2.5rem;
   height: 2.5rem;
   background: none;
-  margin: 0 0.2rem;
+  margin: 0 0.3rem;
   border: solid 2px var(--white);
   transition: all 0.1s;
   background-size: cover;
+  box-shadow: var(--black) 0px 0px 0px 2px;
 }
 
 .batalha-screen .opcoes-batalha button:hover {
-  cursor: pointer;
+  cursor: url(../../../../assets/img/cursors/POINTER.png), pointer;
   background-color: var(--grey-transparent);
   transition: all 0.1s;
 }
@@ -39,6 +40,6 @@
 }
 
 .batalha-screen .opcoes-batalha .opcao-bloqueada:hover {
-  cursor: not-allowed;
+  cursor: url(../../../../assets/img/cursors/NOT_ALLOWED.png), not-allowed;
   background-color: transparent;
 }

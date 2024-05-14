@@ -2,9 +2,11 @@ import { useState } from "react";
 import "./acoes-hud.style.css";
 import { ATAQUES_DATA, HABILIDADES_DATA } from "../../../../database/acoes";
 import { useEscolherAcao } from "../../../../hook/batalha";
+import { useSound } from "../../../../hook";
 
 export function AcoesHUD({ personagem, functions }) {
   const { escolherAcao } = useEscolherAcao();
+  const { playHover, playHover2, playClick } = useSound()
   const [subAcoes, setSubAcoes] = useState({
     ativo: false,
     titulo: "",
@@ -13,6 +15,7 @@ export function AcoesHUD({ personagem, functions }) {
   });
 
   function selectAcao(novoTitulo, novasAcoes, novaData) {
+    playClick()
     const novasSubsAcoes = {
       ...subAcoes,
       titulo: novoTitulo,
@@ -43,14 +46,14 @@ export function AcoesHUD({ personagem, functions }) {
   return !personagem.isInimigo ? (
     <>
       <ul className="hud-acoes">
-        <li
+        <li onMouseEnter={playHover}
           onClick={() =>
             selectAcao("Ataques", personagem.acoes.ataques, ATAQUES_DATA)
           }
         >
           Atacar
         </li>
-        <li
+        <li onMouseEnter={playHover}
           onClick={() =>
             selectAcao(
               "Habilidades",
@@ -61,8 +64,8 @@ export function AcoesHUD({ personagem, functions }) {
         >
           Habilidades
         </li>
-        <li onClick={() => selectAcao("Itens")}>Itens</li>
-        <li onClick={handlePularTurno}>Pular Turno</li>
+        <li  onMouseEnter={playHover} onClick={() => selectAcao("Itens")}>Itens</li>
+        <li  onMouseEnter={playHover} onClick={handlePularTurno}>Pular Turno</li>
       </ul>
 
       {subAcoes.ativo ? (
@@ -78,6 +81,7 @@ export function AcoesHUD({ personagem, functions }) {
                   return (
                     <li
                       key={index}
+                      onMouseEnter={playHover2}
                       className={estaBloqueado ? "acao-bloqueada" : null}
                       onClick={
                         !estaBloqueado

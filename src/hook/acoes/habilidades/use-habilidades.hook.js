@@ -1,13 +1,11 @@
 import { useRolarDado } from "../../batalha/rolar-dado/use-rolar-dado.hook";
 import { useAcoesBase } from "../_base/use-acoes-base.hook";
 import { EFFECTS } from "../../../constants/images";
-import { useBanner } from "../../animacoes/banner/use-banner.hook";
 
 export function useHabilidades() {
   const { rolarDado } = useRolarDado();
   const { iniciarEfeito, restaurarVida, finalizarAcao, gastarMana } =
     useAcoesBase();
-  const { ativarBannerRolagem } = useBanner();
 
   function cura(personagem, alvo, functions) {
     functions.setAnimacoes((old) => {

@@ -5,7 +5,7 @@ export function useIniciarTurno() {
     const { automatizarInimigo } = useAutomatizarInimigo()
 
     function iniciarTurno(personagemAtivo, personagens, turno, functions) {
-        if(personagemAtivo.isInimigo) {
+        if(personagemAtivo.isInimigo && !personagemAtivo.isMorto) {
             automatizarInimigo(personagemAtivo, personagens, turno, functions)
         }
         personagemAtivo.isMorto ? pularTurno(functions.setTurno) : null

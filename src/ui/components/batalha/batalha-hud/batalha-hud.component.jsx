@@ -8,6 +8,14 @@ export function BatalhaHUD({ personagens, personagemAtivo, turno, animacoes, fun
 
   useEffect(() => {
     personagemAtivo ? iniciarTurno(personagemAtivo, personagens, turno, functions) : null;
+
+    if(animacoes.hudAtivo) {
+      functions.setAnimacoes((old) => {return { ...old, hudAtivo: false };});
+      setTimeout(()=>{
+        functions.setAnimacoes((old) => {return { ...old, hudAtivo: true };});
+      },100)
+    }
+    
   }, [personagemAtivo]);
 
   function handleCancelarAcao() {

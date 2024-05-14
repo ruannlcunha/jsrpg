@@ -92,7 +92,7 @@
   div
   section
   .personagem-escolhido:hover {
-  cursor: pointer;
+  cursor: url(../../../../assets/img/cursors/POINTER.png), pointer;
 }
 
 .batalha-screen

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { BANNER_TIPOS } from "../../../constants";
+import { useSound } from "../../audio/sound/use-sound.hook";
 
 export function useBanners() {
+  const { playBanner } = useSound()
   const [banners, setBanners] = useState({
     texto: "", tipo: null, ativo: false, 
     ataque: null, defesa: null, 
@@ -9,6 +11,7 @@ export function useBanners() {
   });
 
   function ativarBannerInimigo(nomeAcao, personagemPerfil, alvoPerfil) {
+    playBanner()
     setBanners((old) => {
       return { ...old, ativo: true, tipo: BANNER_TIPOS.ACAO_INIMIGO,
         nomeAcao, personagemPerfil, alvoPerfil,
@@ -28,6 +31,7 @@ export function useBanners() {
   }
 
   function ativarBannerTexto(texto) {
+    playBanner()
     setBanners((old) => {
       return { ...old, texto: texto, ativo: true, tipo: BANNER_TIPOS.TEXTO };
     });

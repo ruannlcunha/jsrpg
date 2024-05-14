@@ -1,0 +1,104 @@
+
+.batalha-screen .modal .config-som {
+    background-color: var(--white);
+    width: 60%;
+    height: 70%;
+    border: double 5px var(--grey);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.batalha-screen .modal .config-som h1 {
+    background: none;
+    background-color: var(--white);
+    text-shadow: none;
+    filter: none;
+    color: var(--black);
+    font-size: 24px;
+    margin: 1rem;
+    border: double 5px var(--black);
+    border-radius: 0;
+    width: 90%;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+
+.batalha-screen .modal .config-som ul {
+    width: 85%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.batalha-screen .modal .config-som ul li {
+    background-color: var(--white);
+    color: var(--black);
+    font-size: 20px;
+    margin: 0.5rem 0;
+    border: double 5px var(--black);
+    border-radius: 0;
+    width: 90%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    padding: 5px;
+    height: 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.batalha-screen .modal .config-som ul li .config-volume {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.batalha-screen .modal .config-som ul li .config-volume button {
+    margin: 0;
+    height: 25px;
+    width: 25px;
+    font-size: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-grey);
+    border: double 3px var(--black);
+    margin: 0 5px;
+    font-weight: 800;
+    transition: all 0.1s;
+}
+
+.batalha-screen .modal .config-som ul li .config-volume button:hover {
+    cursor: url(../../../../assets/img/cursors/POINTER.png), pointer;
+    transition: all 0.1s;
+    background-color: var(--grey);
+}
+
+.batalha-screen .modal .config-som ul li .config-volume h2 {
+    margin: 0;
+    background-color: var(--white);
+    width: 1rem;
+    height: fit-content;
+    font-size: 20px;
+    border: solid 2px var(--grey);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    padding: 0 10px;
+    font-weight: 100;
+}
+
+.batalha-screen .modal .config-som ul li .config-volume img {
+    height: 100%;
+    width: auto;
+    margin: 0 5px;
+}

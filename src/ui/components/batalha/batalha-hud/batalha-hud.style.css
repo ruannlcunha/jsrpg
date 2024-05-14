@@ -9,6 +9,7 @@
   align-items: self-end;
   border-right: none;
   animation: fade-in 0.5s;
+  transition: all 0.5s;
 }
 
 .batalha-screen .escolhendo-alvo {
@@ -30,7 +31,7 @@
 }
 
 .batalha-screen .cancelar-acao:hover {
-  cursor: pointer;
+  cursor: url(../../../../assets/img/cursors/POINTER.png), pointer;
   color: var(--light-grey);
   transition: all 0.1s;
 }

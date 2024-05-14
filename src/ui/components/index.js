@@ -9,3 +9,4 @@ export { AcoesHUD } from "./batalha/acoes-hud/acoes-hud.component";
 export { BatalhaHUD } from "./batalha/batalha-hud/batalha-hud.component";
 export { Banner } from "./batalha/banner/banner.component";
 export { OpcoesBatalha } from "./batalha/opcoes-batalha/opcoes-batalha.component";
+export { ModalConfigSom } from "./modal-config-som/modal-config-som.component"
