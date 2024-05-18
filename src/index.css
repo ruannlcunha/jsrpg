@@ -31,11 +31,11 @@
   --cyan: #44dbfa;
   --background: #f0f0f0;
   --background-text: #00000065;
-  --perfil-amarelo: #ffd9009c;
-  --perfil-ciano: #00f7ff9c;
-  --perfil-roxo: #6419749c;
-  --perfil-verde: #097e059c;
-  --perfil-inimigo: #ff00009c;
+  --tema-amarelo: #ffd900;
+  --tema-ciano: #70d6da;
+  --tema-roxo: #631974;
+  --tema-verde: #097e05;
+  --tema-inimigo: #bd0c0c;
 }
 
 body {
@@ -48,6 +48,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: textFont, sans-serif;
   cursor: url(./assets/img/cursors/AUTO.png), auto;
+}
+
+button {
+  cursor: url(./assets/img/cursors/POINTER.png), pointer;
 }
 
 ::-webkit-scrollbar {

@@ -1,20 +1,21 @@
 import { useState } from "react";
-import { BANNER_TIPOS } from "../../../constants";
-import { useSound } from "../../audio/sound/use-sound.hook";
+import { BANNER_DURACAO, BANNER_TIPOS } from "../../constants";
+import { useSound } from "../audio/sound/use-sound.hook";
 
 export function useBanners() {
-  const { playBanner } = useSound()
+  const { playBanner, playDado } = useSound()
   const [banners, setBanners] = useState({
-    texto: "", tipo: null, ativo: false, 
+    tipo: null, ativo: false, evento: null,
+    texto: "",
     ataque: null, defesa: null, 
     nomeAcao: null, personagemPerfil: null, alvoPerfil: null,
   });
 
-  function ativarBannerInimigo(nomeAcao, personagemPerfil, alvoPerfil) {
+  function ativarBannerInimigo(nomeAcao, personagemPerfil, alvoPerfil, cor) {
     playBanner()
     setBanners((old) => {
       return { ...old, ativo: true, tipo: BANNER_TIPOS.ACAO_INIMIGO,
-        nomeAcao, personagemPerfil, alvoPerfil,
+        nomeAcao, personagemPerfil, alvoPerfil, cor,
        };
     });
 
@@ -22,12 +23,12 @@ export function useBanners() {
       setBanners((old) => {
         if (old.ativo) {
           return { ...old, ativo: false, tipo: null,
-            nomeAcao: null, personagemPerfil: null, alvoPerfil: null
+            nomeAcao: null, personagemPerfil: null, alvoPerfil: null, cor: null,
            };
         }
         return { ...old };
       });
-    }, 5000);
+    }, BANNER_DURACAO.ACAO_INIMIGO);
   }
 
   function ativarBannerTexto(texto) {
@@ -43,25 +44,29 @@ export function useBanners() {
         }
         return { ...old };
       });
-    }, 5000);
+    }, BANNER_DURACAO.TEXTO);
   }
 
-  function ativarBannerRolagem(ataque, defesa) {
+  function ativarBannerRolagem(ataque, defesa, cor) {
+    playBanner()
+    playDado()
     setBanners((old) => {
       return {
-        ...old,
-        ataque: ataque, defesa: defesa, ativo: true, tipo: BANNER_TIPOS.ROLAGEM,
+        ...old, ativo: true, tipo: BANNER_TIPOS.ROLAGEM,
+        ataque: ataque, defesa: defesa, cor: cor,
       };
     });
 
     setTimeout(() => {
       setBanners((old) => {
         if (old.ativo) {
-          return { ...old, texto: "", ativo: false, tipo: null };
+          return { ...old, ativo: false, tipo: null,
+          ataque: null, defesa: null, cor: null,
+           };
         }
         return { ...old };
       });
-    }, 5000);
+    }, BANNER_DURACAO.ROLAGEM);
   }
 
   return { banners, setBanners, ativarBannerTexto, ativarBannerRolagem, ativarBannerInimigo };

@@ -1,0 +1,32 @@
+.batalha-screen .batalha-hud .hud-acoes {
+  width: 20%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin-left: 1rem;
+  margin-right: 0.6rem;
+}
+
+.batalha-screen .batalha-hud .hud-acoes li {
+  width: 95%;
+  font-size: 24px;
+  margin: 2px;
+  border: double 5px var(--white);
+  color: var(--white);
+  background-color: var(--background-text);
+  transition: 0.1s;
+  padding-left: 5px;
+  text-shadow: 2px 2px 1px var(--black);
+}
+
+.batalha-screen .batalha-hud .hud-acoes li:hover {
+  transition: 0.1s;
+  cursor: url(../../../../assets/img/cursors/POINTER.png), pointer;
+  font-size: 28px;
+  width: 100%;
+  background-color: var(--cyan-transparent);
+}

@@ -5,6 +5,10 @@ import { GlobalConfigProvider } from "./context/global-config.context";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+  
   return (
     <GlobalConfigProvider>
       <ToastContainer />

@@ -1,30 +1,30 @@
-import { useMusicsData } from './use-musics-data.hook';
+import useGlobalConfig from '../../../context/global-config.context';
+import { CONTEXT_CONFIG_NAMES } from '../../../constants';
 
 export function useMusic() {
-    const { MUSICS_DATA } = useMusicsData()
+    const [ config ] = useGlobalConfig()
+    const volumeMusica = (config[CONTEXT_CONFIG_NAMES.SOM_MUSICA])/10
 
-    function _findAudioPlaying() {
-      var sounds = Howler._howls;
-      for (var i = 0; i < sounds.length; i++) {
-        if (sounds[i].playing()) {
-          return sounds[i];
-        }
+    function startMusic() {
+      const audioContext = new AudioContext();
+
+      const audioElement = document.querySelector("audio");
+      audioElement.volume = volumeMusica
+      audioElement.loop = true
+
+      if (audioContext.state === "suspended") {
+        audioContext.resume();
       }
-      return null;
+      audioElement.play();
     }
 
-    function restartMusic(volume) {
-        const audio = _findAudioPlaying()
-        audio.pause()
-        audio.volume(volume/10)
-        audio.play()
+    function restartMusic(novoVolume) {
+      const audioElement = document.querySelector("audio");
+      audioElement.pause();
+      audioElement.volume = novoVolume/10;
+      audioElement.play();
     }
 
-    function playBattle1() {
-      Howler.stop()
-      MUSICS_DATA.BATTLE_1.play();
-    }
-
-    return { restartMusic, playBattle1 }
+    return { restartMusic, startMusic }
 
 }

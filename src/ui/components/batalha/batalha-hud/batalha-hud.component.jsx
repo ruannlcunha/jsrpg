@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { AcoesHUD, StatusHUD } from "../../";
+import { HUDAcoes, StatusHUD } from "../../";
 import "./batalha-hud.style.css";
 import { useIniciarTurno } from "../../../../hook/batalha/iniciar-turno/use-iniciar-turno.hook";
 
@@ -19,7 +19,7 @@ export function BatalhaHUD({ personagens, personagemAtivo, turno, animacoes, fun
   }, [personagemAtivo]);
 
   function handleCancelarAcao() {
-    functions.setAcaoAtiva({ personagem: null, evento: null });
+    functions.setAcaoAtiva({ personagem: null, evento: null, alvos: [] });
     functions.setAnimacoes((old) => {
       return { ...old, escolhendoAlvo: false, hudAtivo: true };
     });
@@ -39,7 +39,7 @@ export function BatalhaHUD({ personagens, personagemAtivo, turno, animacoes, fun
           }
         >
           <StatusHUD personagem={personagemAtivo} />
-          <AcoesHUD personagem={personagemAtivo} functions={functions} />
+          <HUDAcoes personagem={personagemAtivo}  personagens={personagens} functions={functions} />
         </div>
       );
     }

@@ -1,10 +1,11 @@
 import { useRolarDado } from "../../batalha/rolar-dado/use-rolar-dado.hook";
 import { useAcoesBase } from "../_base/use-acoes-base.hook";
 import { EFFECTS } from "../../../constants/images";
+import { ACOES_AUDIO } from "../../../constants/audios/acoes.constant";
 
 export function useHabilidades() {
   const { rolarDado } = useRolarDado();
-  const { iniciarEfeito, restaurarVida, finalizarAcao, gastarMana } =
+  const { iniciarEfeito, restaurarVida, finalizarAcao, gastarMana, informarErro } =
     useAcoesBase();
 
   function cura(personagem, alvo, functions) {
@@ -16,14 +17,10 @@ export function useHabilidades() {
       gastarMana(personagem, 1, functions);
       const vidaRestaurada = rolarDado(8, personagem.atributos.inteligencia);
       const novoAlvo = restaurarVida(alvo, vidaRestaurada, functions);
-      const duracao = iniciarEfeito(novoAlvo, functions, EFFECTS.CURA_EFFECT);
+      const duracao = iniciarEfeito(novoAlvo, functions, EFFECTS.CURA_EFFECT, ACOES_AUDIO.CURA);
       finalizarAcao(functions, novoAlvo, duracao);
     } catch (error) {
-      console.log(`TOAST: ${error.message} `);
-      functions.setAcaoAtiva({ personagem: null, evento: null });
-      functions.setAnimacoes((old) => {
-        return { ...old, escolhendoAlvo: false, hudAtivo: true };
-      });
+      informarErro(error, functions)
     }
   }
 

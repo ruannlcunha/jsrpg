@@ -1,28 +1,47 @@
-import { useSoundsData } from "./use-sounds-data.hook"
+import { SOUNDS } from "../../../constants/audios/sounds.constant"
+import { CONTEXT_CONFIG_NAMES } from "../../../constants"
+import useGlobalConfig from "../../../context/global-config.context"
 
 export function useSound() {
-    const { SOUNDS_DATA } = useSoundsData()
+    const [ config ] = useGlobalConfig()
+    const volumeEfeitos = (config[CONTEXT_CONFIG_NAMES.SOM_EFEITOS])/10
 
-    function playHover() {
-        SOUNDS_DATA.HOVER.play()
+    function playSound(audio) {
+        const novoAudio = new Audio(audio)
+        novoAudio.volume = volumeEfeitos
+        novoAudio.play()
     }
 
-    function playHover2() {
-        SOUNDS_DATA.HOVER_2.play()
+    function playHover(id) {
+        const audio = new Audio(SOUNDS[`HOVER_${id}`])
+        audio.volume = volumeEfeitos
+        audio.play()
     }
 
-    function playClick() {
-        SOUNDS_DATA.CLICK.play()
-    }
-
-    function playClick2() {
-        SOUNDS_DATA.CLICK_2.play()
+    function playClick(id) {
+        const audio = new Audio(SOUNDS[`CLICK_${id}`])
+        audio.volume = volumeEfeitos
+        audio.play()
     }
 
     function playBanner() {
-        SOUNDS_DATA.BANNER.play()
+        const audio = new Audio(SOUNDS.BANNER)
+        audio.volume = volumeEfeitos
+        audio.play()
     }
 
-    return { playHover, playHover2, playClick, playClick2, playBanner}
+    function playDado() {
+        const audio = new Audio(SOUNDS.DADO)
+        audio.volume = volumeEfeitos
+        audio.play()
+    }
+
+    function playDadoResultado() {
+        const audio = new Audio(SOUNDS.DADO_RESULTADO)
+        audio.volume = volumeEfeitos
+        audio.play()
+    }
+
+    return { playSound, playHover, playClick, playBanner, playDado, playDadoResultado}
 
 }

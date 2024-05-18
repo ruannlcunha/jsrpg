@@ -6,14 +6,12 @@ export const THEME_TYPES = {
 export const BASE_URL = "/jsrpg";
 
 export const CONTEXT_CONFIG_DEFAULT = {
-  somGeral: 10,
   somEfeitos: 10,
   somMusica: 10,
   tema: THEME_TYPES.LIGHT_THEME,
 };
 
 export const CONTEXT_CONFIG_NAMES = {
-  SOM_GERAL: "somGeral",
   SOM_EFEITOS: "somEfeitos",
   SOM_MUSICA: "somMusica",
   TEMA: "tema",
@@ -31,9 +29,21 @@ export const TIPOS_DE_DANO = {
   CORTE: "Corte",
 };
 
+export const BANNER_DURACAO = {
+  TEXTO: 5000,
+  ROLAGEM: 8000,
+  ACAO_INIMIGO: 5000,
+}
+
 export const BANNER_TIPOS = {
   TEXTO: "Texto",
   ROLAGEM: "Rolagem",
   ACAO_INIMIGO: "Ação Inimigo"
 
+}
+
+export const ALVOS = {
+  ALIADOS: "ALIADOS",
+  INIMIGOS: "INIMIGOS",
+  PESSOAL: "PESSOAL",
 }

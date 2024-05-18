@@ -13,6 +13,7 @@ export const ATAQUES_DATA = [
     tipo: TIPOS_DE_DANO.IMPACTO,
     custo: 0,
     evento: soco,
+    alvos: "INIMIGOS",
   },
   {
     id: 2,
@@ -22,5 +23,6 @@ export const ATAQUES_DATA = [
     tipo: TIPOS_DE_DANO.PERFURANTE,
     custo: 0,
     evento: soco,
+    alvos: "INIMIGOS",
   },
 ];

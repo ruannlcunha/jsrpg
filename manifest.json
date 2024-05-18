@@ -1,0 +1,18 @@
+{
+    "theme_color": "#5d0274",
+    "background_color": "#ffffff",
+    "display": "fullscreen",
+    "scope": "/",
+    "start_url": "/",
+    "name": "JavaScript RPG",
+    "short_name": "JSRpg",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+        "src": "/icon.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+        }
+      ]
+  }

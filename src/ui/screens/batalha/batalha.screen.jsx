@@ -6,6 +6,7 @@ import {
   BatalhaHUD,
   OpcoesBatalha,
   Banner,
+  AudioContainer,
 } from "../../components";
 import { PERSONAGENS_DATA } from "../../../database/personagens.data";
 import {
@@ -15,7 +16,8 @@ import {
   useZoomCampo,
 } from "../../../hook/batalha/";
 import { useEffect, useState } from "react";
-import { useBanners } from "../../../hook";
+import { useBanners, useSound } from "../../../hook";
+import { MUSICS } from "../../../constants/audios/musics.constant";
 
 export function BatalhaScreen() {
   const { banners, setBanners, ativarBannerTexto, ativarBannerRolagem, ativarBannerInimigo } =
@@ -25,12 +27,15 @@ export function BatalhaScreen() {
   const [acaoAtiva, setAcaoAtiva] = useState({
     personagem: null,
     evento: null,
+    alvos: [],
   });
   const [turno, setTurno] = useState({ atual: 0, maximo: 0 });
   const { instanciarPersonagens } = useInstanciarPersonagens();
   const { iniciarBatalha } = useIniciarBatalha(banners);
   const { finalizarTurno } = useFinalizarTurno();
+  const { playSound } = useSound()
   const { zoom, aumentarZoom, diminuirZoom } = useZoomCampo();
+  const [functions, setFunctions] = useState(null)
 
   const [animacoes, setAnimacoes] = useState({
     isDadosAtivos: false,
@@ -54,14 +59,23 @@ export function BatalhaScreen() {
         PERSONAGENS_DATA[4],
       ]
     );
-    setTurno({ atual: 0, maximo: personagensInstanciados.length });
-    setPersonagens(personagensInstanciados);
-    iniciarBatalha(personagensInstanciados, {
-      setBanners,
+    const todasFuncoes = {
+      setAcaoAtiva,
       setAnimacoes,
       setPersonagens,
+      setTurno,
+      setBanners,
       ativarBannerTexto,
-    });
+      ativarBannerInimigo,
+      ativarBannerRolagem,
+      playSound,
+      setPersonagemAtivo,
+    }
+    setFunctions(todasFuncoes)
+    setTurno({ atual: 0, maximo: personagensInstanciados.length });
+    setPersonagens(personagensInstanciados);
+    iniciarBatalha(personagensInstanciados, todasFuncoes,
+  );
   }, []);
 
   useEffect(() => {
@@ -72,16 +86,18 @@ export function BatalhaScreen() {
     });
   }, [turno, personagens]);
 
-  return (
+  return functions ? (
     <ContainerScreen>
       <div className="batalha-screen">
+        <AudioContainer audio={MUSICS.BATTLE_1}/>
+
         <OpcoesBatalha
           animacoes={animacoes}
           zoom={zoom}
           functions={{ setAnimacoes, aumentarZoom, diminuirZoom }}
         />
 
-        <Banner banner={banners}/>
+        <Banner banners={banners} setBanners={setBanners} />
 
         {personagens.length > 0 && personagemAtivo ? (
           <>
@@ -98,14 +114,7 @@ export function BatalhaScreen() {
               animacoes={animacoes}
               acaoAtiva={acaoAtiva}
               zoom={zoom}
-              functions={{
-                setAcaoAtiva,
-                setAnimacoes,
-                setPersonagens,
-                setTurno,
-                setBanners,
-                ativarBannerRolagem,
-              }}
+              functions={functions}
             />
 
             <BatalhaHUD
@@ -113,19 +122,11 @@ export function BatalhaScreen() {
               personagemAtivo={personagemAtivo}
               animacoes={animacoes}
               turno={turno}
-              functions={{
-                setAcaoAtiva,
-                setAnimacoes,
-                setPersonagens,
-                setTurno,
-                setBanners,
-                ativarBannerRolagem,
-                ativarBannerInimigo
-              }}
+              functions={functions}
             />
           </>
         ) : null}
       </div>
     </ContainerScreen>
-  );
+  ):null;
 }

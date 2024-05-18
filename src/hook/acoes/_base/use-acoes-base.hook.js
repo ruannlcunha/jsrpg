@@ -22,8 +22,10 @@ export function useAcoesBase() {
     });
   }
 
-  async function iniciarEfeito(alvo, functions, effect) {
+  async function iniciarEfeito(alvo, functions, effect, audio) {
     const duracao = await getGifDuration(effect);
+
+    functions.playSound(audio)
 
     const novoAlvo = {
       ...alvo,
@@ -81,7 +83,7 @@ export function useAcoesBase() {
 
   async function finalizarAcao(functions, novoAlvo, duracao) {
     setTimeout(() => {
-      functions.setAcaoAtiva({ personagem: null, evento: null });
+      functions.setAcaoAtiva({ personagem: null, evento: null, alvos: [] });
       functions.setAnimacoes((old) => {
         return { ...old, escolhendoAlvo: false, hudAtivo: true };
       });
@@ -93,11 +95,20 @@ export function useAcoesBase() {
     }, await duracao);
   }
 
+  function informarErro(error, functions) {
+    console.log(`TOAST: ${error.message} `);
+    functions.setAcaoAtiva({ personagem: null, evento: null });
+    functions.setAnimacoes((old) => {
+      return { ...old, escolhendoAlvo: false, hudAtivo: true };
+    });
+  }
+
   return {
     iniciarEfeito,
     causarDano,
     restaurarVida,
     finalizarAcao,
     gastarMana,
+    informarErro,
   };
 }

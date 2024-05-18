@@ -1,6 +1,7 @@
 import { ICONS } from "../../../../constants/images/icons.constant";
 import { calcularPorcentagem } from "../../../../utils";
 import "./personagem.style.css";
+import { personagemStyle } from "./personagem-styles.style"
 import { useEffect, useState } from "react";
 
 export function Personagem({
@@ -14,62 +15,52 @@ export function Personagem({
     personagem.pvAtual,
     personagem.pvTotal
   );
+
+  const isAlvo = acaoAtiva.alvos.some(item=> item.idCombate===personagem.idCombate)
+
   const estaAtivo =
     idAtivo === personagem.idCombate && idAtivo && animacoes.iniciativaTerminou
       ? true
       : false;
   const [estaEscolhido, setEstaEscolhido] = useState(false);
-  const [spriteStyle, setSpriteStyle] = useState(null);
 
   useEffect(() => {
     animacoes.escolhendoAlvo ? null : setEstaEscolhido(false);
   }, [animacoes]);
 
-  useEffect(() => {
-    setSpriteStyle({
-      animation: `${
-        estaAtivo && !personagem.isMorto
-          ? `battle-${
-              personagem.isInimigo ? "inimigo" : "personagem"
-            } 1s alternate infinite ease-in-out,
-            bright-${
-              personagem.isInimigo ? "inimigo" : "personagem"
-            } 0.8s alternate infinite ease-in-out`
-          : ""
-      }`,
-      filter: `${personagem.isMorto ? "grayscale(100%)" : null}`,
-    });
-  }, [estaAtivo, personagem]);
-
-  function hoverEscolher() {
-    if (animacoes.escolhendoAlvo) {
+  function hoverEscolherAlvo() {
+    if (animacoes.escolhendoAlvo && isAlvo) {
       estaEscolhido ? setEstaEscolhido(false) : setEstaEscolhido(true);
     }
   }
 
-  function handleEscolher() {
+  function handleEscolherAlvo() {
     acaoAtiva.evento(acaoAtiva.personagem, personagem, functions);
   }
 
   return (
     <div
       className={estaEscolhido ? "personagem-escolhido" : null}
-      onClick={handleEscolher}
-      onMouseEnter={hoverEscolher}
-      onMouseLeave={hoverEscolher}
+      onClick={isAlvo ? handleEscolherAlvo : null}
+      onMouseEnter={hoverEscolherAlvo}
+      onMouseLeave={hoverEscolherAlvo}
     >
-      {estaAtivo || estaEscolhido ? (
+      {estaAtivo && !isAlvo && !animacoes.escolhendoAlvo || estaEscolhido || isAlvo? (
         <img
-          src={estaEscolhido ? ICONS.ESCOLHER_BAIXO : ICONS.SETA_ATIVO}
+          src={estaEscolhido ? ICONS.ESCOLHER_BAIXO :
+              isAlvo && personagem.isInimigo ? ICONS.CRISTAL_VERMELHO :
+              isAlvo && !personagem.isInimigo ? ICONS.CRISTAL_VERDE :
+              personagem.isInimigo ? ICONS.SETA_ATIVO_INIMIGO : ICONS.SETA_ATIVO
+            }
           alt="Seta apontada para baixo"
           className="seta-ativo"
         />
-      ) : null}
+      ) : null }
 
       <img
         src={personagem.sprite}
         alt="Sprite do personagem"
-        style={spriteStyle}
+        style={personagemStyle(personagem, estaAtivo, animacoes.escolhendoAlvo)}
         className="sprite-personagem"
       />
 

@@ -1,6 +1,6 @@
 import "./status-hud.style.css";
 import { calcularPorcentagem } from "../../../../utils";
-import pixelTexture from "../../../../assets/img/textures/PIXEL_TEXTURE.png";
+import pixelTexture from "../../../../assets/img/textures/BANNER_TEXTURE.png";
 
 export function StatusHUD({ personagem }) {
   const porcentagemVida = calcularPorcentagem(
@@ -18,20 +18,16 @@ export function StatusHUD({ personagem }) {
       style={{
         alignItems: `${personagem.isInimigo ? "self-start" : ""}`,
         borderRadius: `${personagem.isInimigo ? "5px 0px 0px 0px" : ""}`,
-        background: `linear-gradient(${
-          personagem.isInimigo ? "to left" : "to right"
-        }, 
-        var(--${personagem.perfilCor}) 0%, var(--${
-          personagem.perfilCor
-        }) 90%, transparent 99%, transparent 100%),
-        url(${pixelTexture}) ${personagem.isInimigo ? "left" : "right"}`,
+        background: `url(${pixelTexture}) ${personagem.isInimigo ? "left" : "right"},
+        linear-gradient(${personagem.isInimigo ? "to left" : "to right"}, 
+        var(--${personagem.corTema}) 0%, var(--${personagem.corTema}) 90%, transparent 99%, transparent 100%)`
       }}
     >
       <img
         src={personagem.perfil}
         alt=""
         style={{
-          animation: "hud-perfil-inimigo 1s alternate infinite ease-in-out",
+          animation: `${personagem.isInimigo ?"hud-perfil-inimigo 1s alternate infinite ease-in-out": ""}`,
           right: `${personagem.isInimigo ? 0 : ""}`,
           left: `${!personagem.isInimigo ? 0 : ""}`,
         }}

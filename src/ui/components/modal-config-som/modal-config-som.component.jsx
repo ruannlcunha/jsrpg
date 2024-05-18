@@ -9,19 +9,17 @@ import { ICONS } from "../../../constants/images"
 export function ModalConfigSom({isOpen, setIsOpen}) {
     const [efeitosVolume, setEfeitosVolume] = useState(10)
     const [musicaVolume, setMusicaVolume] = useState(10)
-    const [geralVolume, setGeralVolume] = useState(10)
     const [config, setConfig] = useGlobalConfig()
     const { playClick } = useSound()
     const { restartMusic } = useMusic()
 
     useEffect(()=> {
-        setGeralVolume(config[CONTEXT_CONFIG_NAMES.SOM_GERAL])
         setEfeitosVolume(config[CONTEXT_CONFIG_NAMES.SOM_EFEITOS])
         setMusicaVolume(config[CONTEXT_CONFIG_NAMES.SOM_MUSICA])
     },[])
 
     function handleDiminuir(configName, volume, setVolume) {
-        playClick()
+        playClick(1)
         if(volume>0)  {
             setVolume(volume-1)
             setConfig({
@@ -33,7 +31,7 @@ export function ModalConfigSom({isOpen, setIsOpen}) {
     }
 
     function handleAumentar(configName, volume, setVolume) {
-        playClick()
+        playClick(1)
         if(volume<10)  {
             setVolume(volume+1)
             setConfig({
@@ -60,9 +58,9 @@ export function ModalConfigSom({isOpen, setIsOpen}) {
             {text}
             <div className="config-volume">
                 <img src={_volumeIcon} alt="" />
-                <button onClick={()=>handleDiminuir(configName, volume, setVolume)}>-</button>
+                <button onClick={volume>0?()=>handleDiminuir(configName, volume, setVolume):null}>-</button>
                 <h2>{volume}</h2>
-                <button onClick={()=>handleAumentar(configName, volume, setVolume)}>+</button>
+                <button onClick={volume<10?()=>handleAumentar(configName, volume, setVolume):null}>+</button>
             </div>
         </li>
         )
@@ -70,10 +68,9 @@ export function ModalConfigSom({isOpen, setIsOpen}) {
 
     return (
         <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-            <div className="config-som">
+            <div className="config-som"> 
                 <h1>Configurações de Som</h1>
                 <ul>
-                    {renderOption("Volume Geral", CONTEXT_CONFIG_NAMES.SOM_GERAL, geralVolume, setGeralVolume)}
                     {renderOption("Volume de Efeitos Sonoros", CONTEXT_CONFIG_NAMES.SOM_EFEITOS, efeitosVolume, setEfeitosVolume)}
                     {renderOption("Volume de Músicas", CONTEXT_CONFIG_NAMES.SOM_MUSICA, musicaVolume, setMusicaVolume)}
                 </ul>
