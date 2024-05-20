@@ -9,10 +9,11 @@ export function useRolarIniciativa() {
     playDado()
     const personagensNovos = [];
 
-    personagens.map((personagem, index) => {
-      const rolagem = rolarDado(20, personagem.atributos.destreza);
+    personagens.map((personagem) => {
+      const modificadorAgilidade = {valor: personagem.atributos.agilidade, atributo: "Agilidade"}
+      const {total} = rolarDado(1, 20, [modificadorAgilidade]);
       personagensNovos.push({
-        resultadoIniciativa: rolagem.resultadoTotal,
+        resultadoIniciativa: total,
         ...personagem,
       });
     });

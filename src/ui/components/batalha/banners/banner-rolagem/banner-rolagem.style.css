@@ -1,0 +1,188 @@
+
+.batalha-screen .banner-rolagem {
+    width: 100%;
+    height: 0%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 999;
+    transition: all 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0rem;
+    color: transparent;
+    opacity: 0%;
+    animation: banner-rolagem-entrada 5s ease-in-out;
+}
+  
+.batalha-screen .banner-rolagem div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.batalha-screen .banner-rolagem h2 {
+  margin: 0;
+  font-size: 42px;
+  text-shadow: 2px 2px var(--black);
+}
+  
+.batalha-screen .banner-rolagem h1 {
+    font-weight: 100;
+    text-shadow: 3px 3px var(--black);
+    animation: fade-in 1s ease-in;
+    font-size: 8rem;
+}
+  
+.batalha-screen .banner-rolagem div h2 {
+    font-size: 36px;
+    font-weight: 100;
+    text-shadow: 3px 3px var(--black);
+    margin: 0;
+}
+  
+.batalha-screen .banner-rolagem div .d4 {
+    background-image: url(../../../../../assets/img/icons/D4.png);
+}
+  
+.batalha-screen .banner-rolagem div .d6 {
+    background-image: url(../../../../../assets/img/icons/D6.png);
+}
+  
+.batalha-screen .banner-rolagem div .d8 {
+    background-image: url(../../../../../assets/img/icons/D8.png);
+}
+  
+.batalha-screen .banner-rolagem div .d10 {
+    background-image: url(../../../../../assets/img/icons/D10.png);
+}
+  
+.batalha-screen .banner-rolagem div .d12 {
+    background-image: url(../../../../../assets/img/icons/D12.png);
+}
+  
+.batalha-screen .banner-rolagem div .d20 {
+    background-image: url(../../../../../assets/img/icons/D20.png);
+}
+  
+.batalha-screen .banner-rolagem div .valor-total {
+  background-image: url(../../../../../assets/img/icons/VALOR_TOTAL.png);
+  animation: valor-total 5s ease-in-out;
+}
+  
+.batalha-screen .banner-rolagem div .Força {
+  background-image: url(../../../../../assets/img/icons/VALOR_FORCA.png);
+}
+  
+.batalha-screen .banner-rolagem div .Agilidade {
+  background-image: url(../../../../../assets/img/icons/VALOR_AGILIDADE.png);
+}
+  
+.batalha-screen .banner-rolagem div .Magia {
+  background-image: url(../../../../../assets/img/icons/VALOR_AGILIDADE.png);
+}
+  
+.batalha-screen .banner-rolagem div .Vigor {
+  background-image: url(../../../../../assets/img/icons/VALOR_VIGOR.png);
+}
+  
+.batalha-screen .banner-rolagem div .Modificador {
+  background-image: url(../../../../../assets/img/icons/VALOR_MODIFICADOR.png);
+}
+
+.batalha-screen .banner-rolagem .dado div {
+  animation: rolar-dado-rolagem 5s ease-in-out;
+}
+
+.batalha-screen .banner-rolagem div div {
+    width: 10rem;
+    height: 10rem;
+    background: none;
+    background-position: center;
+    background-size: cover;
+    border: none;
+    margin: 0 1rem;
+    transform: rotate(1080deg);
+    color: var(--white);
+    text-shadow: 2px 2px var(--black);
+    font-size: 48px;
+    transition: all 0.3s;
+    opacity: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes banner-rolagem-entrada {
+  0% {
+    top: 50%;
+    height: 0%;
+    opacity: 0%;
+    color: transparent;
+    font-size: 0rem;
+    background-position: left;
+  }
+  10% {
+    top: 12%;
+    height: 75%;
+    opacity: 100%;
+    color: var(--white);
+    font-size: 6rem;
+  }
+  90% {
+    top: 12%;
+    height: 75%;
+    opacity: 100%;
+    color: var(--white);
+    font-size: 7rem;
+  }
+  100% {
+    top: 50%;
+    height: 0%;
+    opacity: 0%;
+    color: transparent;
+    font-size: 0rem;
+    background-position: right;
+  }
+}
+
+@keyframes rolar-dado-rolagem {
+  0% {
+    opacity: 0%;
+    transform: rotate(0deg);
+    color: transparent;
+    text-shadow: none;
+  }
+  5% {
+    opacity: 100%;
+  }
+  35% {
+    transform: rotate(1080deg);
+    color: transparent;
+    text-shadow: none;
+  }
+  50% {
+    color: var(--white);
+    text-shadow: 2px 2px var(--black);
+  }
+}
+
+@keyframes valor-total {
+  0% {
+    opacity: 0%;
+    color: transparent;
+    text-shadow: none;
+  }
+  5% {
+    opacity: 100%;
+  }
+  35% {
+    color: transparent;
+    text-shadow: none;
+  }
+  50% {
+    color: var(--white);
+    text-shadow: 2px 2px var(--black);
+  }
+}

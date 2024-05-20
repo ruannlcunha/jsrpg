@@ -1,8 +1,10 @@
 import { getGifDuration } from "../../../utils";
 import { usePularTurno } from "../../batalha";
+import { useRolarDado } from "../../batalha/rolar-dado/use-rolar-dado.hook";
 
 export function useAcoesBase() {
   const { pularTurno } = usePularTurno();
+  const { rolarDado } = useRolarDado();
 
   function _matarPersonagem(alvo) {
     return { ...alvo, isMorto: true };
@@ -37,7 +39,7 @@ export function useAcoesBase() {
   }
 
   function causarDano(alvo, dano, functions) {
-    let novaVida = Number(alvo.pvAtual - dano.resultadoTotal);
+    let novaVida = Number(alvo.pvAtual - dano);
     novaVida < 0 ? (novaVida = 0) : null;
 
     const novoAlvo = {
@@ -47,6 +49,24 @@ export function useAcoesBase() {
     _alterarPersonagem(functions.setPersonagens, novoAlvo);
 
     return novoAlvo;
+  }
+
+  function consumirItem(personagem, idItem, functions) {
+    const item = [...personagem.itens].find(obj => obj.id === idItem)
+    const novosItens = [...personagem.itens].filter(obj => obj.id !== idItem)
+
+    if(item.quantidade > 1) {
+      const novoItem = {...item, quantidade: item.quantidade-1}
+      novosItens.push(novoItem)
+    }
+
+    const novoPersonagem = {
+      ...personagem,
+      itens: novosItens,
+    };
+    
+    _alterarPersonagem(functions.setPersonagens, novoPersonagem);
+    return novoPersonagem;
   }
 
   function gastarMana(alvo, custo, functions) {
@@ -65,7 +85,7 @@ export function useAcoesBase() {
   }
 
   function restaurarVida(alvo, cura, functions) {
-    let novaVida = Number(alvo.pvAtual + cura.resultadoTotal);
+    let novaVida = Number(alvo.pvAtual + cura);
     novaVida > alvo.pvTotal ? (novaVida = alvo.pvTotal) : null;
 
     if (alvo.isMorto) {
@@ -79,6 +99,13 @@ export function useAcoesBase() {
     _alterarPersonagem(functions.setPersonagens, novoAlvo);
 
     return novoAlvo;
+  }
+
+  function atacar(personagem, alvo, modificador, functions) {
+    const {dados, total} = rolarDado(1, 20, [modificador]);
+    const ataque = {resultadoDado: dados[0].resultado, resultadoTotal: total, ...modificador}
+    functions.ativarBannerAtaque(ataque, alvo.defesa, personagem.corTema);
+    return total >= alvo.defesa
   }
 
   async function finalizarAcao(functions, novoAlvo, duracao) {
@@ -97,7 +124,7 @@ export function useAcoesBase() {
 
   function informarErro(error, functions) {
     console.log(`TOAST: ${error.message} `);
-    functions.setAcaoAtiva({ personagem: null, evento: null });
+    functions.setAcaoAtiva({ personagem: null, evento: null, alvos: [] });
     functions.setAnimacoes((old) => {
       return { ...old, escolhendoAlvo: false, hudAtivo: true };
     });
@@ -110,5 +137,7 @@ export function useAcoesBase() {
     finalizarAcao,
     gastarMana,
     informarErro,
+    consumirItem,
+    atacar,
   };
 }

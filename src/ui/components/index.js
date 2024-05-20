@@ -8,7 +8,7 @@ export { CampoDeBatalha } from "./batalha/campo-de-batalha/campo-de-batalha.comp
 export { StatusHUD } from "./batalha/status-hud/status-hud.component";
 export { HUDAcoes } from "./batalha/hud-acoes/hud-acoes.component";
 export { BatalhaHUD } from "./batalha/batalha-hud/batalha-hud.component";
-export { Banner } from "./batalha/banner/banner.component";
+export { Banners } from "./batalha/banners/banner.component";
 export { OpcoesBatalha } from "./batalha/opcoes-batalha/opcoes-batalha.component";
 export { ModalConfigSom } from "./modal-config-som/modal-config-som.component"
 export { HUDSubAcoes } from "./batalha/hud-sub-acoes/hud-sub-acoes.component"

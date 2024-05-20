@@ -1,0 +1,207 @@
+
+.batalha-screen .banner-ataque {
+  width: 100%;
+  height: 0%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 999;
+  transition: all 1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: titleFont, sans-serif;
+  font-size: 0rem;
+  color: transparent;
+  opacity: 0%;
+  animation: banner-ataque-entrada 8s ease-in-out;
+}
+  
+.batalha-screen .banner-ataque div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+  
+.batalha-screen .banner-ataque h1 {
+  font-weight: 100;
+  text-shadow: 3px 3px var(--black);
+  animation: fade-in 1s ease-in;
+  font-size: 8rem;
+}
+  
+.batalha-screen .banner-ataque h2 {
+  margin: 0;
+  animation: duracao-ataque 8s ease-in-out;
+  font-size: 42px;
+  text-shadow: 2px 2px var(--black);
+}
+  
+.batalha-screen .banner-ataque div {
+  animation: duracao-ataque 8s ease-in-out;
+}
+  
+.batalha-screen .banner-ataque div h2 {
+  font-size: 42px;
+  font-weight: 100;
+  text-shadow: 3px 3px var(--black);
+  margin: 0;
+}
+  
+.batalha-screen .banner-ataque div .d20 {
+  background-image: url(../../../../../assets/img/icons/D20.png);
+  animation: rolar-dado-ataque 8s ease-in-out;
+}
+  
+.batalha-screen .banner-ataque div .cross-sword {
+  background-image: url(../../../../../assets/img/icons/CROSS_SWORD.png);
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 2rem;
+}
+  
+.batalha-screen .banner-ataque div .valor-ataque {
+  background-image: url(../../../../../assets/img/icons/VALOR_ATAQUE.png);
+  animation: total-ataque 8s ease-in-out;
+}
+  
+.batalha-screen .banner-ataque div .Força {
+  background-image: url(../../../../../assets/img/icons/VALOR_FORCA.png);
+}
+  
+.batalha-screen .banner-ataque div .Agilidade {
+  background-image: url(../../../../../assets/img/icons/VALOR_AGILIDADE.png);
+}
+  
+.batalha-screen .banner-ataque div .Magia {
+  background-image: url(../../../../../assets/img/icons/VALOR_AGILIDADE.png);
+}
+  
+.batalha-screen .banner-ataque div .Vigor {
+  background-image: url(../../../../../assets/img/icons/VALOR_VIGOR.png);
+}
+  
+.batalha-screen .banner-ataque div .shield {
+  background-image: url(../../../../../assets/img/icons/SHIELD.png);
+}
+  
+.batalha-screen .banner-ataque div div {
+  width: 10rem;
+  height: 10rem;
+  background: none;
+  background-position: center;
+  background-size: cover;
+  border: none;
+  margin: 0 1rem;
+  transform: rotate(1080deg);
+  color: var(--white);
+  text-shadow: 2px 2px var(--black);
+  font-family: titleFont, sans-serif;
+  font-size: 48px;
+  transition: all 0.3s;
+  opacity: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes banner-ataque-entrada {
+  0% {
+  top: 50%;
+  height: 0%;
+  opacity: 0%;
+  color: transparent;
+  font-size: 0rem;
+  background-position: left;
+  }
+  10% {
+  top: 12%;
+  height: 75%;
+  opacity: 100%;
+  color: var(--white);
+  font-size: 6rem;
+  }
+  90% {
+  top: 12%;
+  height: 75%;
+  opacity: 100%;
+  color: var(--white);
+  font-size: 6rem;
+  }
+  100% {
+  top: 50%;
+  height: 0%;
+  opacity: 0%;
+  color: transparent;
+  font-size: 0rem;
+  background-position: right;
+  }
+}
+
+
+@keyframes duracao-ataque {
+  0% {
+    opacity: 0%;
+    }
+  5% {
+    opacity: 100%;
+    }
+  45% {
+    opacity: 100%;
+    }
+  50% {
+    opacity: 0%;
+    }
+}
+
+@keyframes rolar-dado-ataque {
+  0% {
+    opacity: 0%;
+    transform: rotate(0deg);
+    color: transparent;
+    text-shadow: none;
+    }
+  5% {
+    opacity: 100%;
+    }
+  25% {
+    transform: rotate(1080deg);
+    color: transparent;
+    text-shadow: none;
+    }
+  30% {
+    color: var(--white);
+    text-shadow: 2px 2px var(--black);
+    }
+  45% {
+    opacity: 100%;
+    }
+  50% {
+    opacity: 0%;
+    }
+}
+
+@keyframes total-ataque {
+  0% {
+    opacity: 0%;
+    color: transparent;
+    text-shadow: none;
+    }
+  5% {
+    opacity: 100%;
+    }
+  25% {
+    color: transparent;
+    text-shadow: none;
+    }
+  30% {
+    color: var(--white);
+    text-shadow: 2px 2px var(--black);
+    }
+  45% {
+    opacity: 100%;
+    }
+  50% {
+    opacity: 0%;
+    }
+}

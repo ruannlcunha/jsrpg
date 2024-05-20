@@ -31,14 +31,16 @@ export const TIPOS_DE_DANO = {
 
 export const BANNER_DURACAO = {
   TEXTO: 5000,
-  ROLAGEM: 8000,
-  ACAO_INIMIGO: 5000,
+  ATAQUE: 8000,
+  ROLAGEM: 5000,
+  INIMIGO: 5000,
 }
 
 export const BANNER_TIPOS = {
   TEXTO: "Texto",
+  ATAQUE: "Ataque",
   ROLAGEM: "Rolagem",
-  ACAO_INIMIGO: "Ação Inimigo"
+  INIMIGO: "Ação Inimigo",
 
 }
 

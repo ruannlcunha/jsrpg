@@ -15,6 +15,7 @@ import CONFIG from "../../assets/img/icons/CONFIG.png";
 import CHANGE_PORTRAIT from "../../assets/img/icons/CHANGE_PORTRAIT.png";
 import CRISTAL_VERMELHO from "../../assets/img/icons/CRISTAL_VERMELHO.png";
 import CRISTAL_VERDE from "../../assets/img/icons/CRISTAL_VERDE.png";
+import QUADRADO_VAZIO from "../../assets/img/icons/QUADRADO_VAZIO.png";
 
 export const ICONS = {
   HUD,
@@ -34,4 +35,5 @@ export const ICONS = {
   CHANGE_PORTRAIT,
   CRISTAL_VERMELHO,
   CRISTAL_VERDE,
+  QUADRADO_VAZIO,
 };

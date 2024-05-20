@@ -5,10 +5,10 @@ import {
   ContainerScreen,
   BatalhaHUD,
   OpcoesBatalha,
-  Banner,
+  Banners,
   AudioContainer,
 } from "../../components";
-import { PERSONAGENS_DATA } from "../../../database/personagens.data";
+import { PERSONAGENS_DATA } from "../../../database/personagens";
 import {
   useFinalizarTurno,
   useIniciarBatalha,
@@ -20,8 +20,8 @@ import { useBanners, useSound } from "../../../hook";
 import { MUSICS } from "../../../constants/audios/musics.constant";
 
 export function BatalhaScreen() {
-  const { banners, setBanners, ativarBannerTexto, ativarBannerRolagem, ativarBannerInimigo } =
-    useBanners();
+  const { banners, setBanners,
+    ativarBannerTexto, ativarBannerAtaque, ativarBannerInimigo, ativarBannerRolagem } = useBanners();
   const [personagens, setPersonagens] = useState([]);
   const [personagemAtivo, setPersonagemAtivo] = useState({ idCombate: null });
   const [acaoAtiva, setAcaoAtiva] = useState({
@@ -48,14 +48,8 @@ export function BatalhaScreen() {
     const personagensInstanciados = instanciarPersonagens(
       [
         PERSONAGENS_DATA[0],
-        PERSONAGENS_DATA[1],
-        PERSONAGENS_DATA[2],
-        PERSONAGENS_DATA[3],
       ],
       [
-        PERSONAGENS_DATA[4],
-        PERSONAGENS_DATA[4],
-        PERSONAGENS_DATA[4],
         PERSONAGENS_DATA[4],
       ]
     );
@@ -68,6 +62,7 @@ export function BatalhaScreen() {
       ativarBannerTexto,
       ativarBannerInimigo,
       ativarBannerRolagem,
+      ativarBannerAtaque,
       playSound,
       setPersonagemAtivo,
     }
@@ -97,7 +92,7 @@ export function BatalhaScreen() {
           functions={{ setAnimacoes, aumentarZoom, diminuirZoom }}
         />
 
-        <Banner banners={banners} setBanners={setBanners} />
+        <Banners banners={banners} setBanners={setBanners} />
 
         {personagens.length > 0 && personagemAtivo ? (
           <>

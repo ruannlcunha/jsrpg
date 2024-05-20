@@ -45,22 +45,22 @@ export function Personagem({
       onMouseEnter={hoverEscolherAlvo}
       onMouseLeave={hoverEscolherAlvo}
     >
-      {estaAtivo && !isAlvo && !animacoes.escolhendoAlvo || estaEscolhido || isAlvo? (
-        <img
-          src={estaEscolhido ? ICONS.ESCOLHER_BAIXO :
-              isAlvo && personagem.isInimigo ? ICONS.CRISTAL_VERMELHO :
-              isAlvo && !personagem.isInimigo ? ICONS.CRISTAL_VERDE :
-              personagem.isInimigo ? ICONS.SETA_ATIVO_INIMIGO : ICONS.SETA_ATIVO
-            }
-          alt="Seta apontada para baixo"
-          className="seta-ativo"
-        />
-      ) : null }
+      <img
+        src={
+          estaEscolhido ? ICONS.ESCOLHER_BAIXO :
+          isAlvo && personagem.isInimigo ? ICONS.CRISTAL_VERMELHO :
+          isAlvo && !personagem.isInimigo ? ICONS.CRISTAL_VERDE :
+          estaAtivo && personagem.isInimigo ? ICONS.SETA_ATIVO_INIMIGO :
+          estaAtivo && !animacoes.escolhendoAlvo ? ICONS.SETA_ATIVO : ICONS.QUADRADO_VAZIO
+          }
+        alt="Seta apontada para baixo"
+        className="icone-ativo"
+      />
 
       <img
         src={personagem.sprite}
         alt="Sprite do personagem"
-        style={personagemStyle(personagem, estaAtivo, animacoes.escolhendoAlvo)}
+        style={personagemStyle(personagem, estaAtivo, isAlvo, animacoes.escolhendoAlvo)}
         className="sprite-personagem"
       />
 

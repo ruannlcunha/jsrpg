@@ -1,6 +1,6 @@
 import "./hud-acoes.style.css";
 import { useState } from "react";
-import { ATAQUES_DATA, HABILIDADES_DATA } from "../../../../database/acoes";
+import { ATAQUES_DATA, HABILIDADES_DATA, CONSUMIVEIS_DATA } from "../../../../database";
 import { useSound } from "../../../../hook";
 import { HUDSubAcoes } from "../hud-sub-acoes/hud-sub-acoes.component";
 
@@ -47,23 +47,36 @@ export function HUDAcoes({ personagem, personagens, functions }) {
       <ul className="hud-acoes">
         <li onMouseEnter={()=>playHover(1)}
           onClick={() =>
-            selectAcao("Ataques", personagem.acoes.ataques, ATAQUES_DATA)
+            selectAcao("Ataques", personagem.ataques, ATAQUES_DATA)
           }
         >
           Atacar
         </li>
+
         <li onMouseEnter={()=>playHover(1)}
           onClick={() =>
             selectAcao(
               "Habilidades",
-              personagem.acoes.habilidades,
+              personagem.habilidades,
               HABILIDADES_DATA
             )
           }
         >
           Habilidades
         </li>
-        <li  onMouseEnter={()=>playHover(1)} onClick={() => selectAcao("Itens")}>Itens</li>
+
+        <li onMouseEnter={()=>playHover(1)}
+          onClick={() =>
+            selectAcao(
+              "Itens",
+              personagem.itens,
+              CONSUMIVEIS_DATA
+            )
+          }
+        >
+          Itens
+        </li>
+
         <li  onMouseEnter={()=>playHover(1)} onClick={handlePularTurno}>Pular Turno</li>
       </ul>
 

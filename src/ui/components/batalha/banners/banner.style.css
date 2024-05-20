@@ -1,0 +1,20 @@
+.batalha-screen .pular-banner {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: 4rem;
+  color: var(--white);
+  font-family: titleFont, sans-serif;
+  background: none;
+  border: none;
+  padding: 0 0.5rem;
+  border-left: double 4px var(--white);
+  border-right: double 4px var(--white);
+  filter: drop-shadow(2px 2px var(--black));
+  transition: all 0.1s;
+}
+
+.batalha-screen .pular-banner:hover {
+  transition: all 0.1s;
+  color: var(--light-grey);
+}

@@ -5,7 +5,7 @@ import { useAtaques } from "../../hook/acoes/ataques/use-ataques.hook";
 const { soco } = useAtaques();
 
 export const ATAQUES_DATA = [
-  {
+    {
     id: 1,
     nome: "Soco",
     dadoDeDano: "1d3",

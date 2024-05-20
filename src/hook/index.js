@@ -3,3 +3,4 @@ export { useToast } from "./toast/use-toast.hook";
 export { useBanners } from "./banners/use-banners.hook";
 export { useSound } from "./audio/sound/use-sound.hook"
 export { useMusic } from "./audio/music/use-music.hook"
+export { useConsumiveis } from "./acoes/consumiveis/use-consumiveis.hook"

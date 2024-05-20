@@ -8,13 +8,14 @@ export function useBanners() {
     tipo: null, ativo: false, evento: null,
     texto: "",
     ataque: null, defesa: null, 
+    dados: [], modificadores: [], total: null,
     nomeAcao: null, personagemPerfil: null, alvoPerfil: null,
   });
 
   function ativarBannerInimigo(nomeAcao, personagemPerfil, alvoPerfil, cor) {
     playBanner()
     setBanners((old) => {
-      return { ...old, ativo: true, tipo: BANNER_TIPOS.ACAO_INIMIGO,
+      return { ...old, ativo: true, tipo: BANNER_TIPOS.INIMIGO,
         nomeAcao, personagemPerfil, alvoPerfil, cor,
        };
     });
@@ -28,7 +29,7 @@ export function useBanners() {
         }
         return { ...old };
       });
-    }, BANNER_DURACAO.ACAO_INIMIGO);
+    }, BANNER_DURACAO.INIMIGO);
   }
 
   function ativarBannerTexto(texto) {
@@ -47,12 +48,12 @@ export function useBanners() {
     }, BANNER_DURACAO.TEXTO);
   }
 
-  function ativarBannerRolagem(ataque, defesa, cor) {
+  function ativarBannerAtaque(ataque, defesa, cor) {
     playBanner()
     playDado()
     setBanners((old) => {
       return {
-        ...old, ativo: true, tipo: BANNER_TIPOS.ROLAGEM,
+        ...old, ativo: true, tipo: BANNER_TIPOS.ATAQUE,
         ataque: ataque, defesa: defesa, cor: cor,
       };
     });
@@ -66,8 +67,30 @@ export function useBanners() {
         }
         return { ...old };
       });
+    }, BANNER_DURACAO.ATAQUE);
+  }
+
+  function ativarBannerRolagem(dados, modificadores, total, cor) {
+    playBanner()
+    playDado()
+    setBanners((old) => {
+      return {
+        ...old, ativo: true, tipo: BANNER_TIPOS.ROLAGEM, cor: cor,
+        dados, modificadores, total,
+      };
+    });
+
+    setTimeout(() => {
+      setBanners((old) => {
+        if (old.ativo) {
+          return { ...old, ativo: false, tipo: null,
+            dados: [], modificadores: [], total: null,
+           };
+        }
+        return { ...old };
+      });
     }, BANNER_DURACAO.ROLAGEM);
   }
 
-  return { banners, setBanners, ativarBannerTexto, ativarBannerRolagem, ativarBannerInimigo };
+  return { banners, setBanners, ativarBannerTexto, ativarBannerAtaque, ativarBannerInimigo, ativarBannerRolagem };
 }

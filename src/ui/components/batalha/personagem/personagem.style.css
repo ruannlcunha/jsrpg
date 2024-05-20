@@ -32,13 +32,13 @@
   animation: battle-inimigo 1s alternate infinite ease-in-out;
 }
 
-.batalha-screen .campo-de-batalha section div section div .seta-ativo {
-  height: 17%;
-  width: auto;
-  margin-bottom: -17%;
+.batalha-screen .campo-de-batalha section div section div .icone-ativo {
+  height: 2rem;
+  width: 2rem;
+  margin-bottom: -2rem;
   position: relative;
   top: 0;
-  animation: seta-ativo 1s infinite alternate-reverse ease-in-out;
+  animation: icone-ativo 1s infinite alternate-reverse ease-in-out;
 }
 
 .batalha-screen .campo-de-batalha section div section div section {
@@ -146,7 +146,18 @@
   }
 }
 
-@keyframes seta-ativo {
+@keyframes bright-aliado {
+  from {
+    filter: drop-shadow(-2px 2px 3px var(--light-green))
+      drop-shadow(2px 2px 3px var(--light-green)) brightness(100%);
+  }
+  to {
+    filter: drop-shadow(-2px 2px 5px var(--light-green))
+      drop-shadow(2px 2px 5px var(--light-green)) brightness(110%);
+  }
+}
+
+@keyframes icone-ativo {
   from {
     top: 0;
   }

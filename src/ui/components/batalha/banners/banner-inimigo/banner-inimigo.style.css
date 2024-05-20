@@ -1,0 +1,88 @@
+
+.batalha-screen .banner-inimigo {
+    width: 100%;
+    height: 75%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    opacity: 0%;
+    background: linear-gradient(0deg, var(--red-transparent) 75%, transparent 100%),
+    url(../../../../../assets/img/textures/PIXEL_TEXTURE.png) top;
+    animation: inimigo 5s ease-in-out;
+}
+  
+.batalha-screen .banner-inimigo .personagem {
+    position: absolute;
+    height: 100%;
+    width: auto;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(-1);
+    animation: inimigo-personagem 5s ease-in-out;
+}
+  
+.batalha-screen .banner-inimigo .alvo {
+    position: absolute;
+    height: 100%;
+    width: auto;
+    bottom: 0;
+    right: 0;
+    animation: inimigo-alvo 5s ease-in-out;
+}
+  
+.batalha-screen .banner-inimigo section {
+    height: 90%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+.batalha-screen .banner-inimigo section h1 {
+    margin: 1rem 0;
+    font-weight: 100;
+    font-family: titleFont, sans-serif;
+    color: var(--white);
+    text-shadow: 4px 4px var(--black);
+    font-size: 72px;
+    animation: inimigo-text 5s ease-in-out;
+}
+  
+.batalha-screen .banner-inimigo section img {
+    height: 50%;
+    animation: inimigo-icon 5s ease-in-out;
+}
+
+  @keyframes inimigo {
+    0% {opacity: 0%;}
+    15% {opacity: 100%;}
+    85% {opacity: 100%;}
+    100% {opacity: 0%;}
+}
+  
+  @keyframes inimigo-personagem {
+    from {transform: translateX(-2rem) scaleX(-1);}
+    to {transform: translateX(0) scaleX(-1);}
+}
+  
+  @keyframes inimigo-alvo {
+    from {transform: translateX(2rem);}
+    to {transform: translateX(0);}
+}
+  
+  @keyframes inimigo-text {
+    from {font-size: 56px;}
+    to {font-size: 72px;}
+}
+  
+  @keyframes inimigo-icon {
+    from {transform: translateX(-1rem);}
+    to {transform: translateX(1rem);}
+}

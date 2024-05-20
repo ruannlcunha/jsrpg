@@ -14,9 +14,9 @@ export function HUDSubAcoes({subAcoes, personagem, personagens, functions}) {
     function renderAtaque(subAcao) {
         return (
             <section>
-              <h2>Dano: {subAcao.dadoDeDano}</h2>
-              <h2>Tipo: {subAcao.tipo}</h2>
-              <h2>Custo: {subAcao.custo}PM</h2>
+              <h2><span>Dano:</span> {subAcao.dadoDeDano}</h2>
+              <h2><span>Tipo:</span> {subAcao.tipo}</h2>
+              <h2><span>Custo:</span> {subAcao.custo}PM</h2>
             </section>
         )
     }
@@ -24,8 +24,17 @@ export function HUDSubAcoes({subAcoes, personagem, personagens, functions}) {
     function renderHabilidade(subAcao) {
         return (
             <section>
-              <h2>Efeito: {subAcao.efeito}</h2>
-              <h2>Custo: {subAcao.custo}PM</h2>
+              <h2><span>Efeito:</span> {subAcao.efeito}</h2>
+              <h2><span>Custo:</span> {subAcao.custo}PM</h2>
+            </section>
+        )
+    }
+
+    function renderItem(subAcao, acao) {
+        return (
+            <section>
+              <h2><span>Efeito:</span> {subAcao.efeito}</h2>
+              <h2><span>Quantidade:</span> {acao.quantidade}</h2>
             </section>
         )
     }
@@ -37,11 +46,11 @@ export function HUDSubAcoes({subAcoes, personagem, personagens, functions}) {
               <header>{subAcoes.titulo}</header>
               <section>
                 {subAcoes.acoesAtuais
-                  ? subAcoes.acoesAtuais.map((acaoId, index) => {
+                  ? subAcoes.acoesAtuais.map((acao, index) => {
                       const subAcao = subAcoes.data.find(
-                          (item) => item.id === acaoId
+                          (item) => item.id === acao.id
                         );
-                        const estaBloqueado = personagem.pmAtual < subAcao.custo;
+                        const estaBloqueado = subAcao.custo ? (personagem.pmAtual < subAcao.custo) : false;
                         return (
                             <li
                             key={index}
@@ -61,7 +70,9 @@ export function HUDSubAcoes({subAcoes, personagem, personagens, functions}) {
                             }
                             >
                           <h1>{subAcao.nome}</h1>
-                          {subAcao.dadoDeDano ? renderAtaque(subAcao) : renderHabilidade(subAcao)}
+                          {subAcao.dadoDeDano ? renderAtaque(subAcao) :
+                          subAcao.custo ? renderHabilidade(subAcao) :
+                          renderItem(subAcao, acao)}
                         </li>
                       );
                     })

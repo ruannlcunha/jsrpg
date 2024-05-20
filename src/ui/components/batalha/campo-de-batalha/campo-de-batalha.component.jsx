@@ -10,6 +10,7 @@ export function CampoDeBatalha({
   acaoAtiva,
   functions,
 }) {
+
   const aliadosOrdenados = aliados.sort(function (a, b) {
     return a.posicaoEmCampo - b.posicaoEmCampo;
   });
@@ -31,7 +32,7 @@ export function CampoDeBatalha({
     );
   }
 
-  return aliados.length > 1 && inimigos.length > 1 ? (
+  return (
     <div
       className="campo-de-batalha"
       style={{
@@ -43,23 +44,29 @@ export function CampoDeBatalha({
     >
       <section>
         <div className="inimigos">
-          <section>{renderPersonagem(inimigosOrdenados[0])}</section>
           <section>
-            {renderPersonagem(inimigosOrdenados[1])}
-            {renderPersonagem(inimigosOrdenados[2])}
+            {inimigosOrdenados.length>=4 ? renderPersonagem(inimigosOrdenados[3]):null}
           </section>
-          <section>{renderPersonagem(inimigosOrdenados[3])}</section>
+          <section>
+            {inimigosOrdenados.length>=3 ? renderPersonagem(inimigosOrdenados[2]):null}
+            {inimigosOrdenados.length>=2 ? renderPersonagem(inimigosOrdenados[1]):null}
+          </section>
+          <section>
+            {renderPersonagem(inimigosOrdenados[0])}
+          </section>
         </div>
 
         <div className="personagens">
           <section>{renderPersonagem(aliadosOrdenados[0])}</section>
           <section>
-            {renderPersonagem(aliadosOrdenados[1])}
-            {renderPersonagem(aliadosOrdenados[2])}
+            {aliadosOrdenados.length>=2 ? renderPersonagem(aliadosOrdenados[1]):null}
+            {aliadosOrdenados.length>=3 ? renderPersonagem(aliadosOrdenados[2]):null}
           </section>
-          <section>{renderPersonagem(aliadosOrdenados[3])}</section>
+          <section>
+            {aliadosOrdenados.length>=4 ? renderPersonagem(aliadosOrdenados[3]):null}
+            </section>
         </div>
       </section>
     </div>
-  ) : null;
+  );
 }
