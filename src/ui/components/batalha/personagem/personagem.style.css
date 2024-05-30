@@ -33,9 +33,9 @@
 }
 
 .batalha-screen .campo-de-batalha section div section div .icone-ativo {
-  height: 2rem;
-  width: 2rem;
-  margin-bottom: -2rem;
+  height: 17%;
+  width: 17%;
+  margin-bottom: -17%;
   position: relative;
   top: 0;
   animation: icone-ativo 1s infinite alternate-reverse ease-in-out;

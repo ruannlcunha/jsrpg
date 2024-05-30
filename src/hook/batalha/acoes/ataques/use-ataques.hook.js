@@ -1,8 +1,8 @@
-import { useRolarDado } from "../../batalha/rolar-dado/use-rolar-dado.hook";
+import { useRolarDado } from "../../rolar-dado/use-rolar-dado.hook";
 import { useAcoesBase } from "../_base/use-acoes-base.hook";
-import { EFFECTS } from "../../../constants/images";
-import { BANNER_DURACAO } from "../../../constants";
-import { ACOES_AUDIO } from "../../../constants/audios/acoes.constant";
+import { EFFECTS } from "../../../../constants/images";
+import { BANNER_DURACAO } from "../../../../constants";
+import { ACOES_AUDIO } from "../../../../constants/audios/acoes.constant";
 
 export function useAtaques() {
   const { rolarDado } = useRolarDado();

@@ -6,6 +6,7 @@ import ZOOM_IN from "../../assets/img/icons/ZOOM_IN.png";
 import SETA_ATIVO from "../../assets/img/icons/SETA_ATIVO.png";
 import SETA_ATIVO_INIMIGO from "../../assets/img/icons/SETA_ATIVO_INIMIGO.png";
 import SETA_DIREITA from "../../assets/img/icons/SETA_DIREITA.png";
+import SETA_VOLTAR from "../../assets/img/icons/SETA_VOLTAR.png";
 import ESCOLHER_BAIXO from "../../assets/img/icons/ESCOLHER_BAIXO.png";
 import VOLUME_ALTO from "../../assets/img/icons/VOLUME_ALTO.png";
 import VOLUME_MEDIO from "../../assets/img/icons/VOLUME_MEDIO.png";
@@ -16,6 +17,11 @@ import CHANGE_PORTRAIT from "../../assets/img/icons/CHANGE_PORTRAIT.png";
 import CRISTAL_VERMELHO from "../../assets/img/icons/CRISTAL_VERMELHO.png";
 import CRISTAL_VERDE from "../../assets/img/icons/CRISTAL_VERDE.png";
 import QUADRADO_VAZIO from "../../assets/img/icons/QUADRADO_VAZIO.png";
+import CROSS_SWORD from "../../assets/img/icons/CROSS_SWORD.png";
+import FORCA from "../../assets/img/icons/FORCA.png";
+import AGILIDADE from "../../assets/img/icons/AGILIDADE.png";
+import MAGIA from "../../assets/img/icons/MAGIA.png";
+import VIGOR from "../../assets/img/icons/VIGOR.png";
 
 export const ICONS = {
   HUD,
@@ -27,6 +33,7 @@ export const ICONS = {
   SETA_ATIVO_INIMIGO,
   ESCOLHER_BAIXO,
   SETA_DIREITA,
+  SETA_VOLTAR,
   VOLUME_ALTO,
   VOLUME_MEDIO,
   VOLUME_BAIXO,
@@ -36,4 +43,9 @@ export const ICONS = {
   CRISTAL_VERMELHO,
   CRISTAL_VERDE,
   QUADRADO_VAZIO,
+  CROSS_SWORD,
+  FORCA,
+  AGILIDADE,
+  MAGIA,
+  VIGOR,
 };

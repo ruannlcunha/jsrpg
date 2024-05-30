@@ -1,5 +1,6 @@
 import { createHashRouter } from "react-router-dom";
-import { BatalhaScreen, IniciarBatalhaScreen, RootScreen } from "../ui/screens";
+import { BatalhaScreen, RootScreen } from "../ui/screens";
+import { FimDeBatalha } from "../ui/components";
 
 export const router = createHashRouter([
   {
@@ -8,7 +9,7 @@ export const router = createHashRouter([
     children: [
       {
         path: `/`,
-        element: <IniciarBatalhaScreen />,
+        element: <BatalhaScreen />,
       },
     ],
   },

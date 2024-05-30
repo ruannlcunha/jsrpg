@@ -1,4 +1,4 @@
-import { useConsumiveis } from "../../hook"
+import { useConsumiveis } from "../../hook/batalha"
 
 const { pocaoCuraMenor } = useConsumiveis()
 

@@ -1,6 +1,6 @@
-import { getGifDuration } from "../../../utils";
-import { usePularTurno } from "../../batalha";
-import { useRolarDado } from "../../batalha/rolar-dado/use-rolar-dado.hook";
+import { getGifDuration } from "../../../../utils";
+import { usePularTurno } from "../../";
+import { useRolarDado } from "../../rolar-dado/use-rolar-dado.hook";
 
 export function useAcoesBase() {
   const { pularTurno } = usePularTurno();

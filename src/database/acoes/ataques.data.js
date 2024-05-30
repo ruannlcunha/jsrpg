@@ -1,6 +1,6 @@
 import "../../constants/index";
 import { CATEGORIAS_DE_DANO, TIPOS_DE_DANO } from "../../constants/index";
-import { useAtaques } from "../../hook/acoes/ataques/use-ataques.hook";
+import { useAtaques } from "../../hook/batalha";
 
 const { soco } = useAtaques();
 

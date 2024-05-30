@@ -6,3 +6,6 @@ export { usePularTurno } from "./pular-turno/use-pular-turno.hook";
 export { useFinalizarTurno } from "./finalizar-turno/use-finalizar-turno.hook";
 export { useZoomCampo } from "./zoom-campo/use-zoom-campo.hook";
 export { useAutomatizarInimigo } from "./automatizar-inimigo/use-automatizar-inimigo.hook"
+export { useAtaques } from "./acoes/ataques/use-ataques.hook"
+export { useHabilidades } from "./acoes/habilidades/use-habilidades.hook"
+export { useConsumiveis } from "./acoes/consumiveis/use-consumiveis.hook"

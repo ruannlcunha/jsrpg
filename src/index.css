@@ -11,6 +11,8 @@
 }
 
 :root {
+  --fundo-janela: #cef8ff;
+  --fundo-destaque: #dde7f2;
   --black: #000000;
   --grey: #494949;
   --light-grey: #d4d4d4;
@@ -24,6 +26,9 @@
   --cyan-transparent: #cef8ff63;
   --blue-transparent: #1e43949c;
   --light-blue: #82dcfd;
+  --pacific-blue: #2596be;
+  --blue-grey: #7BA1B8;
+  --blue-green: #00FF96;
   --blue: #1e4394;
   --dark-blue: #0f2249;
   --light-green: #43d843;

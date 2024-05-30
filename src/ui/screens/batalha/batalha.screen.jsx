@@ -1,127 +1,68 @@
-import "./batalha.style.css";
-import {
-  CampoDeBatalha,
-  Turnos,
-  ContainerScreen,
-  BatalhaHUD,
-  OpcoesBatalha,
-  Banners,
-  AudioContainer,
-} from "../../components";
-import { PERSONAGENS_DATA } from "../../../database/personagens";
-import {
-  useFinalizarTurno,
-  useIniciarBatalha,
-  useInstanciarPersonagens,
-  useZoomCampo,
-} from "../../../hook/batalha/";
 import { useEffect, useState } from "react";
-import { useBanners, useSound } from "../../../hook";
-import { MUSICS } from "../../../constants/audios/musics.constant";
+import { IniciarBatalhaScreen, JogarBatalha, FimDeBatalha, AudioContainer } from "../../components";
+import "./batalha.style.css";
+import { useInstanciarPersonagens } from "../../../hook/batalha";
+import { PERSONAGENS_DATA } from "../../../database";
+import { useMusic } from "../../../hook";
 
 export function BatalhaScreen() {
-  const { banners, setBanners,
-    ativarBannerTexto, ativarBannerAtaque, ativarBannerInimigo, ativarBannerRolagem } = useBanners();
-  const [personagens, setPersonagens] = useState([]);
-  const [personagemAtivo, setPersonagemAtivo] = useState({ idCombate: null });
-  const [acaoAtiva, setAcaoAtiva] = useState({
-    personagem: null,
-    evento: null,
-    alvos: [],
-  });
-  const [turno, setTurno] = useState({ atual: 0, maximo: 0 });
+  const [telas, setTelas] = useState({iniciarBatalha: true, jogarBatalha: false, fimBatalha: false})
   const { instanciarPersonagens } = useInstanciarPersonagens();
-  const { iniciarBatalha } = useIniciarBatalha(banners);
-  const { finalizarTurno } = useFinalizarTurno();
-  const { playSound } = useSound()
-  const { zoom, aumentarZoom, diminuirZoom } = useZoomCampo();
-  const [functions, setFunctions] = useState(null)
+  const [resultado, setResultado] = useState("")
+  const [personagensInstanciados, setPersonagensInstanciados] = useState([]);
+  const [musica, setMusica] = useState({src: null, loop: false})
+  const { startMusic } = useMusic()
 
-  const [animacoes, setAnimacoes] = useState({
-    isDadosAtivos: false,
-    hudAtivo: false,
-    iniciativaTerminou: false,
-    escolhendoAlvo: false,
-  });
-
-  useEffect(() => {
-    const personagensInstanciados = instanciarPersonagens(
+  useEffect(()=>{
+    setPersonagensInstanciados(instanciarPersonagens(
       [
         PERSONAGENS_DATA[0],
       ],
       [
         PERSONAGENS_DATA[4],
       ]
-    );
-    const todasFuncoes = {
-      setAcaoAtiva,
-      setAnimacoes,
-      setPersonagens,
-      setTurno,
-      setBanners,
-      ativarBannerTexto,
-      ativarBannerInimigo,
-      ativarBannerRolagem,
-      ativarBannerAtaque,
-      playSound,
-      setPersonagemAtivo,
-    }
-    setFunctions(todasFuncoes)
-    setTurno({ atual: 0, maximo: personagensInstanciados.length });
-    setPersonagens(personagensInstanciados);
-    iniciarBatalha(personagensInstanciados, todasFuncoes,
-  );
-  }, []);
+    ));
+  },[])
 
-  useEffect(() => {
-    finalizarTurno(personagens, turno, {
-      ativarBannerTexto,
-      setPersonagemAtivo,
-      setBanners,
-    });
-  }, [turno, personagens]);
+  useEffect(()=>{
+    musica.src ? startMusic(musica.loop) : null
+  },[musica])
 
-  return functions ? (
-    <ContainerScreen>
-      <div className="batalha-screen">
-        <AudioContainer audio={MUSICS.BATTLE_1}/>
+  function handleIniciar() {
+    setTelas({iniciarBatalha: false, jogarBatalha: true, fimBatalha: false})
+  }
 
-        <OpcoesBatalha
-          animacoes={animacoes}
-          zoom={zoom}
-          functions={{ setAnimacoes, aumentarZoom, diminuirZoom }}
-        />
+  function handleFinalizarBatalha(texto) {
+    setTelas({iniciarBatalha: false, jogarBatalha: true, fimBatalha: true})
+    setResultado(texto)
+  }
+  
 
-        <Banners banners={banners} setBanners={setBanners} />
+  return personagensInstanciados.length>0 ? (
+    <>
+    <AudioContainer audio={musica.src}/>
+    {telas.iniciarBatalha ?
+    <IniciarBatalhaScreen
+    aliados={personagensInstanciados.filter((item) => item.isInimigo === false)}
+    inimigos={personagensInstanciados.filter((item) => item.isInimigo === true)}
+    iniciarFunction={handleIniciar}
+    />
+    : null}
+    {telas.jogarBatalha ?
+    <JogarBatalha
+    setMusica={setMusica}
+    personagensInstanciados={personagensInstanciados}
+    handleFinalizarBatalha={handleFinalizarBatalha}
+    />
+    : null}
+    {telas.fimBatalha ?
+    <FimDeBatalha
+    personagens={personagensInstanciados}
+    resultado={resultado}
+    setMusica={setMusica}
+    />
+    : null}
+    </>
+  ) : null
 
-        {personagens.length > 0 && personagemAtivo ? (
-          <>
-            <Turnos
-              animacoes={animacoes}
-              idAtivo={personagemAtivo.idCombate}
-              personagens={personagens}
-            />
-
-            <CampoDeBatalha
-              idAtivo={personagemAtivo.idCombate}
-              aliados={personagens.filter((item) => item.isInimigo === false)}
-              inimigos={personagens.filter((item) => item.isInimigo === true)}
-              animacoes={animacoes}
-              acaoAtiva={acaoAtiva}
-              zoom={zoom}
-              functions={functions}
-            />
-
-            <BatalhaHUD
-              personagens={personagens}
-              personagemAtivo={personagemAtivo}
-              animacoes={animacoes}
-              turno={turno}
-              functions={functions}
-            />
-          </>
-        ) : null}
-      </div>
-    </ContainerScreen>
-  ):null;
 }

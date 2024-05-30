@@ -1,7 +1,7 @@
 import { ICONS } from "../../../constants/images";
 import "./container-screen.style.css";
 
-export function ContainerScreen({ children }) {
+export function ContainerScreen({ children, style }) {
 
   function renderPortraitScreen() {
     if(window.innerHeight > window.innerWidth) {
@@ -17,7 +17,7 @@ export function ContainerScreen({ children }) {
   return (
     <>
     {renderPortraitScreen()}
-    <div className="container-screen">
+    <div className="container-screen" style={style}>
       {children}
     </div>
     </>

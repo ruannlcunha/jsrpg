@@ -7,7 +7,8 @@ export function BatalhaHUD({ personagens, personagemAtivo, turno, animacoes, fun
   const { iniciarTurno } = useIniciarTurno();
 
   useEffect(() => {
-    personagemAtivo ? iniciarTurno(personagemAtivo, personagens, turno, functions) : null;
+    personagemAtivo && animacoes.iniciativaTerminou
+    ? iniciarTurno(personagemAtivo, personagens, turno, functions) : null;
 
     if(animacoes.hudAtivo) {
       functions.setAnimacoes((old) => {return { ...old, hudAtivo: false };});
@@ -16,7 +17,7 @@ export function BatalhaHUD({ personagens, personagemAtivo, turno, animacoes, fun
       },100)
     }
     
-  }, [personagemAtivo]);
+  }, [personagemAtivo, animacoes.iniciativaTerminou]);
 
   function handleCancelarAcao() {
     functions.setAcaoAtiva({ personagem: null, evento: null, alvos: [] });

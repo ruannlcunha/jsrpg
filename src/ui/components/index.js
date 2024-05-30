@@ -12,3 +12,10 @@ export { Banners } from "./batalha/banners/banner.component";
 export { OpcoesBatalha } from "./batalha/opcoes-batalha/opcoes-batalha.component";
 export { ModalConfigSom } from "./modal-config-som/modal-config-som.component"
 export { HUDSubAcoes } from "./batalha/hud-sub-acoes/hud-sub-acoes.component"
+export { CardBatalha } from "./batalha/card-batalha/card-batalha.component"
+export { CardExperiencia } from "./batalha/card-experiencia/card-experiencia.component"
+export { JogarBatalha } from "./jogar-batalha/jogar-batalha.component"
+export { IniciarBatalhaScreen } from "./iniciar-batalha/iniciar-batalha.screen"
+export { ResultadoExperiencia } from "./batalha/resultado-experiencia/resultado-experiencia.component"
+export { ResultadoRecompensas } from "./batalha/resultado-recompensas/resultado-recompensas.component"
+export { FimDeBatalha } from "./fim-de-batalha/fim-de-batalha.component"

@@ -1,4 +1,4 @@
-import { useHabilidades } from "../../hook/acoes/habilidades/use-habilidades.hook";
+import { useHabilidades } from "../../hook/batalha";
 
 const { cura } = useHabilidades();
 

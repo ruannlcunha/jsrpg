@@ -10,7 +10,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: titleFont, sans-serif;
   font-size: 0rem;
   color: transparent;
   opacity: 0%;
@@ -28,6 +27,7 @@
   text-shadow: 3px 3px var(--black);
   animation: fade-in 1s ease-in;
   font-size: 8rem;
+  font-family: titleFont, sans-serif;
 }
   
 .batalha-screen .banner-ataque h2 {

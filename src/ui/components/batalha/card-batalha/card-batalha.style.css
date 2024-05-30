@@ -1,0 +1,138 @@
+
+.iniciar-batalha-screen section .party-cards .card-batalha {
+    margin: 2px 0;
+    width: 100%;
+    height: 23%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--grey) url(../../../assets/img/textures/DEGRADE_CIRCULO.png);
+    background-size: cover;
+    border: none;
+    border-top: solid 3px var(--black);
+    border-bottom: solid 3px var(--black);
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info header {
+    height: 25%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: var(--background-text);
+    border-bottom: double 3px var(--black);
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info header h1 {
+    margin: 5px;
+    font-size: 24px;
+    font-weight: 100;
+    font-family: titleFont, sans-serif;
+    color: var(--white);
+    text-shadow: 2px 2px var(--black);
+    width: 100%;
+    text-align: left;
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info section {
+    height: 75%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info section .card-status {
+    width: 60%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    justify-content: flex-start;
+    margin-left: 10px;
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info section .card-status h1 {
+    margin: 2px;
+    font-size: 16px;
+    font-weight: 100;
+    color: var(--white);
+    text-shadow: 2px 2px var(--black);
+    text-align: left;
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info section .card-status div {
+    width: 90%;
+    height: 4px;
+    border: solid 2px var(--white);
+    transform: skew(-25deg);
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info section .card-status .barra-pv {
+    background: linear-gradient(to right, var(--red) 100%, var(--light-grey) 1%);
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info section .card-status .barra-pm {
+    background: linear-gradient(to right, var(--blue) 100%, var(--light-grey) 1%);
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info section .card-atributos {
+    width: 40%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    justify-content: space-evenly;
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info section .card-atributos div {
+    height: 20%;
+    width: 100%;
+    font-size: 16px;
+    color: var(--white);
+    text-shadow: 2px 2px var(--black);
+    font-weight: 100;
+    display: flex;
+    align-items: center;
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-info section .card-atributos div img {
+    height: 100%;
+    margin: 0 3px;
+}
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-perfil {
+    width: 30%;
+    height: 100%;
+    border: solid 3px var(--black);
+}
+
+
+.iniciar-batalha-screen section .party-cards .card-batalha .card-ponta {
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-bottom-color: var(--black);
+    position: relative;
+    top: -15px;
+    background: none;
+  }
+  
+  .iniciar-batalha-screen section .party-cards .card-batalha .card-ponta:after {
+    content: "";
+    position: absolute;
+    left: -15px;
+    top: 15px;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-top-color: var(--black);
+  }
+  

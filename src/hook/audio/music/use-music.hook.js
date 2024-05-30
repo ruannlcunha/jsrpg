@@ -5,12 +5,12 @@ export function useMusic() {
     const [ config ] = useGlobalConfig()
     const volumeMusica = (config[CONTEXT_CONFIG_NAMES.SOM_MUSICA])/10
 
-    function startMusic() {
+    function startMusic(loop) {
       const audioContext = new AudioContext();
 
       const audioElement = document.querySelector("audio");
       audioElement.volume = volumeMusica
-      audioElement.loop = true
+      audioElement.loop = loop
 
       if (audioContext.state === "suspended") {
         audioContext.resume();

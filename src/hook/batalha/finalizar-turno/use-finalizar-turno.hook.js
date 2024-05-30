@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
 
 export function useFinalizarTurno() {
-  const navigate = useNavigate();
 
   function _encerrarCombate(texto, functions) {
-    functions.ativarBannerTexto(texto, functions.setBanners);
-    setTimeout(() => {
-      navigate(0);
-    }, 5010);
+    functions.setAnimacoes((old) => {
+      return { ...old, hudAtivo: false };
+    });
+    setTimeout(()=>{
+      functions.handleFinalizarBatalha(texto)
+    }, 1000)
   }
 
   function finalizarTurno(personagens, turno, functions) {
